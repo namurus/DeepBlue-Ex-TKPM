@@ -2,7 +2,6 @@ const Student = require('../models/student.model');
 
 const findStudents = async (studentId) => {
     try {
-        console.log('Searching studentId:', studentId, typeof studentId);
         const student = await
             Student.find({ studentId: studentId });
         return student;
@@ -35,7 +34,7 @@ const createStudent = async (student) => {
 
 const deleteStudent = async (studentId) => {
     try {
-        const student = await Student.findOneAndDelete(studentId);
+        const student = await Student.findOneAndDelete({ studentId: studentId });
     }
     catch (error) {
         console.error('Error deleting student:', error);
@@ -43,10 +42,23 @@ const deleteStudent = async (studentId) => {
     }
 }
 
+const updateStudent = async (student) => {
+    try {
+        const studentId = student.studentId;
+        const updatedStudent = await Student.findOneAndUpdate({ studentId: studentId }, student, { new: true });
+
+        return updatedStudent;
+    }
+    catch (error) {
+        console.error('Error updating student:', error);
+        throw error;
+    }
+}
 
 module.exports = {
     getAllStudents: getAllStudents,
     createStudent: createStudent,
     deleteStudent: deleteStudent,
     findStudents: findStudents,
+    updateStudent: updateStudent
 };

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cập nhật thông tin sinh viên</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="container mx-auto p-8">
+        <div class="flex justify-center">
+            <form action="/update-student" method="POST" class="w-full max-w-lg bg-white p-6 rounded-lg shadow-md">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+                    Cập nhật thông tin sinh viên
+                </h2>
+
+                <!-- Mã số sinh viên (readonly) -->
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="studentId">Mã số sinh viên</label>
+                    <input type="text" name="studentId" value="<%= student.studentId %>" readonly
+                        class="shadow appearance-none border rounded w-full py-2 px-3 bg-gray-100 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+                </div>
+
+                <!-- Họ tên -->
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="fullName">Họ tên</label>
+                    <input type="text" name="fullName" value="<%= student.fullName %>" required
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+                </div>
+
+                <!-- Ngày tháng năm sinh -->
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="dateOfBirth">Ngày tháng năm
+                        sinh</label>
+                    <input type="date" name="dateOfBirth" value="<%= student.dateOfBirth %>" required
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+                </div>
+
+                <!-- Giới tính -->
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="gender">Giới tính</label>
+                    <select name="gender" required
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                        <option value="Nam" <%=student.gender==='Nam' ? 'selected' : '' %>>Nam</option>
+                        <option value="Nữ" <%=student.gender==='Nữ' ? 'selected' : '' %>>Nữ</option>
+                    </select>
+                </div>
+
+                <!-- Khoa -->
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="faculty">Khoa</label>
+                    <select name="faculty" required
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                        <option value="Khoa Luật" <%=student.faculty==='Khoa Luật' ? 'selected' : '' %>>Khoa Luật
+                        </option>
+                        <option value="Khoa Tiếng Anh thương mại" <%=student.faculty==='Khoa Tiếng Anh thương mại'
+                            ? 'selected' : '' %>>Khoa Tiếng Anh thương mại</option>
+                        <option value="Khoa Tiếng Nhật" <%=student.faculty==='Khoa Tiếng Nhật' ? 'selected' : '' %>>Khoa
+                            Tiếng Nhật</option>
+                        <option value="Khoa Tiếng Pháp" <%=student.faculty==='Khoa Tiếng Pháp' ? 'selected' : '' %>>Khoa
+                            Tiếng Pháp</option>
+                    </select>
+                </div>
+
+                <!-- Khóa -->
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="course">Khóa</label>
+                    <input type="text" name="course" value="<%= student.course %>" required
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+                </div>
+
+                <!-- Chương trình -->
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="program">Chương trình</label>
+                    <input type="text" name="program" value="<%= student.program %>" required
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+                </div>
+
+                <!-- Địa chỉ -->
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="address">Địa chỉ</label>
+                    <input type="text" name="address" value="<%= student.address %>" required
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+                </div>
+
+                <!-- Email -->
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email</label>
+                    <input type="email" name="email" value="<%= student.email %>" required
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+                </div>
+
+                <!-- Số điện thoại -->
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="phoneNumber">Số điện thoại</label>
+                    <input type="text" name="phoneNumber" value="<%= student.phoneNumber %>" required
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+                </div>
+
+                <!-- Nút Submit -->
+                <div class="flex items-center justify-center">
+                    <button type="submit"
+                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline">
+                        Cập nhật
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Create Student</title>
+    <title>Thêm sinh viên</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
 </head>
 
@@ -19,7 +19,7 @@
                 <!-- Mã số sinh viên -->
                 <div class="mb-4">
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="studentId">Mã số sinh viên</label>
-                    <input type="text" name="studentId"
+                    <input type="text" name="studentId" required
                         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         placeholder="Mã số sinh viên" />
                 </div>
@@ -27,7 +27,7 @@
                 <!-- Họ tên -->
                 <div class="mb-4">
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="fullName">Họ tên</label>
-                    <input type="text" name="fullName"
+                    <input type="text" name="fullName" required
                         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         placeholder="Họ tên" />
                 </div>
@@ -36,7 +36,7 @@
                 <div class="mb-4">
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="dateOfBirth">Ngày tháng năm
                         sinh</label>
-                    <input type="date" name="dateOfBirth"
+                    <input type="date" name="dateOfBirth" required
                         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
                 </div>
 
@@ -44,7 +44,7 @@
                 <div class="mb-4">
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="gender">Giới tính</label>
                     <div class="relative">
-                        <select name="gender"
+                        <select name="gender" required
                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                             <option value="Nam">Nam</option>
                             <option value="Nữ">Nữ</option>
@@ -60,7 +60,7 @@
                 <div class="mb-4 relative">
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="faculty">Khoa</label>
                     <div class="relative">
-                        <select name="faculty"
+                        <select name="faculty" required
                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline hover:cursor-pointer">
                             <option value="Khoa Luật">Khoa Luật</option>
                             <option value="Khoa Tiếng Anh thương mại">
@@ -79,7 +79,7 @@
                 <!-- Khóa -->
                 <div class="mb-4">
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="course">Khóa</label>
-                    <input type="text" name="course"
+                    <input type="text" name="course" required
                         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         placeholder="Khóa" />
                 </div>
@@ -87,7 +87,7 @@
                 <!-- Chương trình -->
                 <div class="mb-4">
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="program">Chương trình</label>
-                    <input type="text" name="program"
+                    <input type="text" name="program" required
                         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         placeholder="Chương trình" />
                 </div>
@@ -95,7 +95,7 @@
                 <!-- Địa chỉ -->
                 <div class="mb-4">
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="address">Địa chỉ</label>
-                    <input type="text" name="address"
+                    <input type="text" name="address" required
                         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         placeholder="Địa chỉ" />
                 </div>
@@ -103,7 +103,7 @@
                 <!-- Email -->
                 <div class="mb-4">
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email</label>
-                    <input type="email" name="email"
+                    <input type="email" name="email" required
                         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         placeholder="Email" />
                 </div>
@@ -112,7 +112,7 @@
                 <div class="mb-4">
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="phoneNumber">Số điện thoại liên
                         hệ</label>
-                    <input type="text" name="phoneNumber"
+                    <input type="text" name="phoneNumber" required
                         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         placeholder="Số điện thoại liên hệ" />
                 </div>
@@ -121,7 +121,7 @@
                 <div class="mb-4">
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="status">Tình trạng sinh viên</label>
                     <div class="relative">
-                        <select name="studentStatus"
+                        <select name="studentStatus" required
                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                             <option value="Đang học">Đang học</option>
                             <option value="Đã tốt nghiệp">Đã tốt nghiệp</option>
@@ -148,3 +148,13 @@
 </body>
 
 </html>
+
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('success')) {
+        alert('Thêm sinh viên thành công!');
+        window.location.href = '/get-create-student'; // Reload trang sau khi nhấn OK
+    } else if (urlParams.has('error')) {
+        alert('Có lỗi xảy ra, vui lòng thử lại!');
+    }
+</script>

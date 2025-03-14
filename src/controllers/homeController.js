@@ -10,10 +10,6 @@ let displayStudent = async (req, res) => {
             data = await CRUDService.getAllStudents();
         }
 
-        console.log('--------------------------');
-        console.log(data);
-        console.log('--------------------------');
-
         return res.render('displayStudent.ejs', {
             dataTable: data,
         });
@@ -41,21 +37,42 @@ let deleteStudent = async (req, res) => {
 let createStudent = async (req, res) => {
     try {
         let data = await CRUDService.createStudent(req.body);
-        console.log('--------------------------');
-        console.log(data);
-        console.log(req.body);
-        console.log('--------------------------');
 
-        return res.send('Create student successfully');
+        return res.redirect('/get-create-student?success=1');
     } catch (e) {
         console.log(e);
-        return res.status(500).send('An error occurred while creating student');
+        return res.redirect('/get-create-student?error=1');
     }
-} 
+}
+
+let getUpdateStudentPage = async (req, res) => {
+    try {
+        let student = await CRUDService.findStudents(req.query.studentId);
+        return res.render('updateStudent.ejs', {
+            student: student[0]
+        });
+    } catch (e) {
+        console.log(e);
+        return res.status(500).send('An error occurred while updating student');
+    }
+}
+
+let updateStudent = async (req, res) => {
+    try {
+        let data = await CRUDService.updateStudent(req.body);
+        return res.redirect('/get-student');
+    }
+    catch (e) {
+        console.log(e);
+        return res.status(500).send('An error occurred while updating student');
+    }
+}
 
 module.exports = {
     displayStudent: displayStudent,
     createStudent: createStudent,
     getCreateStudentPage: getCreateStudentPage,
     deleteStudent: deleteStudent,
+    updateStudent: updateStudent,
+    getUpdateStudentPage: getUpdateStudentPage
 }

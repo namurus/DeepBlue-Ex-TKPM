@@ -7,6 +7,8 @@ let initWebRoutes = (app) => {
     router.get("/get-student", homeController.displayStudent);
     router.get("/get-create-student", homeController.getCreateStudentPage);
     router.post("/delete-student", homeController.deleteStudent);
+    router.get("/update-student", homeController.getUpdateStudentPage);
+    router.post("/update-student", homeController.updateStudent);
     return app.use("/", router);
 }
 
