@@ -2,19 +2,21 @@
 
 ## Cấu trúc source code
 ```
+Mô hình MVC:
+
 DeepBlue-Ex-TKPM/
 ├── src/
 │   ├── config/
-│   ├── controllers/
-│   ├── models/
-│   ├── routes/
-│   ├── seeders/
-│   ├── services/
-│   ├── views/
-│   └── server.js
+│   ├── controllers/    Viết logic backend cho ứng (API)
+│   ├── models/         Chứa model cho Student
+│   ├── routes/         Cài đặt các route cho chương trình (Định tuyến API)
+│   ├── seeders/    
+│   ├── services/       Các dịch vụ để xử lý trên Database MongoDB
+│   ├── views/          Chứa giao diện của ứng dụng
+│   └── server.js       File chính khởi động server
 ├── .babelrc
-├── .env
-├── .env.example
+├── .env                Chứa biến môi trường
+├── .env.example        File .env mẫu 
 ├── package-lock.json
 ├── package.json
 └── README.md 
