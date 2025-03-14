@@ -2,12 +2,12 @@ import CRUDService from '../services/CRUDService';
 
 let displayStudent = async (req, res) => {
     try {
-        let data = await CRUDService.getAllStudent();
+        let data = await CRUDService.getAllStudents();
         console.log('--------------------------');
         console.log(data);
         console.log('--------------------------');
 
-        return res.render('displayCRUD.ejs', {
+        return res.render('displayStudent.ejs', {
             dataTable: data,
         });
     } catch (e) {
@@ -18,6 +18,16 @@ let displayStudent = async (req, res) => {
 
 let getCreateStudentPage = (req, res) => {
     return res.render('createStudent.ejs');
+}
+
+let deleteStudent = async (req, res) => {
+    try {
+        let data = await CRUDService.deleteStudent(req.query.id);
+        return res.redirect('/get-student');
+    } catch (e) {
+        console.log(e);
+        return res.status(500).send('An error occurred while deleting student');
+    }
 }
 
 let createStudent = async (req, res) => {
@@ -39,4 +49,5 @@ module.exports = {
     displayStudent: displayStudent,
     createStudent: createStudent,
     getCreateStudentPage: getCreateStudentPage,
+    deleteStudent: deleteStudent,
 }
