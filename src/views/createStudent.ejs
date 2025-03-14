@@ -12,7 +12,7 @@
     <div class="container mx-auto p-8">
         <div class="flex justify-center">
             <form action="/create-student" method="POST" class="w-full max-w-lg bg-white p-6 rounded-lg shadow-md">
-                <h2 class="text-2xl font-semibold text-gray-800 mb-6 text-center">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">
                     Thông tin sinh viên
                 </h2>
 
@@ -43,19 +43,37 @@
                 <!-- Giới tính -->
                 <div class="mb-4">
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="gender">Giới tính</label>
-                    <select name="gender"
-                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                        <option value="Nam">Nam</option>
-                        <option value="Nữ">Nữ</option>
-                    </select>
+                    <div class="relative">
+                        <select name="gender"
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            <option value="Nam">Nam</option>
+                            <option value="Nữ">Nữ</option>
+                        </select>
+                        <div
+                            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 text-xs">
+                            ▼
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Khoa -->
-                <div class="mb-4">
+                <div class="mb-4 relative">
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="faculty">Khoa</label>
-                    <input type="text" name="faculty"
-                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        placeholder="Khoa" />
+                    <div class="relative">
+                        <select name="faculty"
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline hover:cursor-pointer">
+                            <option value="Khoa Luật">Khoa Luật</option>
+                            <option value="Khoa Tiếng Anh thương mại">
+                                Khoa Tiếng Anh thương mại
+                            </option>
+                            <option value="Khoa Tiếng Nhật">Khoa Tiếng Nhật</option>
+                            <option value="Khoa Tiếng Pháp">Khoa Tiếng Pháp</option>
+                        </select>
+                        <div
+                            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 text-xs">
+                            ▼
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Khóa -->
@@ -102,9 +120,19 @@
                 <!-- Tình trạng sinh viên -->
                 <div class="mb-4">
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="status">Tình trạng sinh viên</label>
-                    <input type="text" name="studentStatus"
-                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        placeholder="Tình trạng sinh viên" />
+                    <div class="relative">
+                        <select name="studentStatus"
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            <option value="Đang học">Đang học</option>
+                            <option value="Đã tốt nghiệp">Đã tốt nghiệp</option>
+                            <option value="Đã thôi học">Đã thôi học</option>
+                            <option value="Tạm dừng học">Tạm dừng học</option>
+                        </select>
+                        <div
+                            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 text-xs">
+                            ▼
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Nút Submit -->
