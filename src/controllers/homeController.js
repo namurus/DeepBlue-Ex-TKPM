@@ -38,10 +38,10 @@ let createStudent = async (req, res) => {
     try {
         let data = await CRUDService.createStudent(req.body);
 
-        return res.redirect('/get-create-student?success=1');
+        return res.redirect('/get-student');
     } catch (e) {
         console.log(e);
-        return res.redirect('/get-create-student?error=1');
+        return res.redirect('/get-student');
     }
 }
 
