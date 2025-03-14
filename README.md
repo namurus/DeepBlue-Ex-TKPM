@@ -2,7 +2,7 @@
 
 ## Cấu trúc source code
 ```
-Mô hình MVC:
+Mô hình sử dụng: Mô hình MVC
 
 DeepBlue-Ex-TKPM/
 ├── src/
