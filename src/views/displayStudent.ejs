@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student List</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container mx-auto p-4">
+        <h1 class="text-2xl font-bold mb-4">Danh sách Sinh viên</h1>
+        <table class="min-w-full bg-white border border-gray-300 shadow-md rounded-lg">
+            <thead>
+                <tr class="bg-gray-200">
+                    <th class="py-2 px-4 border-b">Mã SV</th>
+                    <th class="py-2 px-4 border-b">Họ tên</th>
+                    <th class="py-2 px-4 border-b">Ngày sinh</th>
+                    <th class="py-2 px-4 border-b">Giới tính</th>
+                    <th class="py-2 px-4 border-b">Khoa</th>
+                    <th class="py-2 px-4 border-b">Khóa</th>
+                    <th class="py-2 px-4 border-b">Chương trình</th>
+                    <th class="py-2 px-4 border-b">Địa chỉ</th>
+                    <th class="py-2 px-4 border-b">Email</th>
+                    <th class="py-2 px-4 border-b">Số điện thoại</th>
+                    <th class="py-2 px-4 border-b">Tình trạng</th>
+                    <th class="py-2 px-4 border-b">Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(let i=0; i < dataTable.length; i++) { %>
+                    <tr class="hover:bg-gray-100">
+                        <td class="py-2 px-4 border-b">
+                            <%= dataTable[i].studentId %>
+                        </td>
+                        <td class="py-2 px-4 border-b">
+                            <%= dataTable[i].fullName %>
+                        </td>
+                        <td class="py-2 px-4 border-b">
+                            <%= new Date(dataTable[i].dateOfBirth).toLocaleDateString() %>
+                        </td>
+                        <td class="py-2 px-4 border-b">
+                            <%= dataTable[i].gender %>
+                        </td>
+                        <td class="py-2 px-4 border-b">
+                            <%= dataTable[i].faculty %>
+                        </td>
+                        <td class="py-2 px-4 border-b">
+                            <%= dataTable[i].course %>
+                        </td>
+                        <td class="py-2 px-4 border-b">
+                            <%= dataTable[i].program %>
+                        </td>
+                        <td class="py-2 px-4 border-b">
+                            <%= dataTable[i].address %>
+                        </td>
+                        <td class="py-2 px-4 border-b">
+                            <%= dataTable[i].email %>
+                        </td>
+                        <td class="py-2 px-4 border-b">
+                            <%= dataTable[i].phoneNumber %>
+                        </td>
+                        <td class="py-2 px-4 border-b">
+                            <%= dataTable[i].studentStatus %>
+                        </td>
+                        <td class="py-2 px-4 border-b">
+                            <a href="/edit-crud?id=<%= dataTable[i]._id %>"
+                                class="bg-green-500 text-white py-1 px-3 rounded hover:bg-green-700">Edit</a>
+                            <form action="/delete-student?id=<%= dataTable[i]._id %>" method="POST" class="inline">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button type="submit" class="bg-red-500 text-white py-1 px-3 rounded hover:bg-red-700"
+                                    onclick="return confirm('Bạn có chắc muốn xóa sinh viên này?')">Delete</button>
+                            </form>
+
+                        </td>
+                    </tr>
+                    <% } %>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>
