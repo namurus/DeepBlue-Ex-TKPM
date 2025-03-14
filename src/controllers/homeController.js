@@ -2,7 +2,14 @@ import CRUDService from '../services/CRUDService';
 
 let displayStudent = async (req, res) => {
     try {
-        let data = await CRUDService.getAllStudents();
+        let data;
+
+        if (req.query.studentId) {
+            data = await CRUDService.findStudents(req.query.studentId);
+        } else {
+            data = await CRUDService.getAllStudents();
+        }
+
         console.log('--------------------------');
         console.log(data);
         console.log('--------------------------');
@@ -14,7 +21,8 @@ let displayStudent = async (req, res) => {
         console.log(e);
         return res.status(500).send('An error occurred while fetching data');
     }
-}
+};
+
 
 let getCreateStudentPage = (req, res) => {
     return res.render('createStudent.ejs');

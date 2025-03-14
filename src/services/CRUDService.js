@@ -1,5 +1,18 @@
 const Student = require('../models/student.model');
 
+const findStudents = async (studentId) => {
+    try {
+        console.log('Searching studentId:', studentId, typeof studentId);
+        const student = await
+            Student.find({ studentId: studentId });
+        return student;
+    }
+    catch (error) {
+        console.error('Error fetching student:', error);
+        throw error;
+    }
+}
+
 const getAllStudents = async () => {
     try {
         const students = await Student.find({});
@@ -35,4 +48,5 @@ module.exports = {
     getAllStudents: getAllStudents,
     createStudent: createStudent,
     deleteStudent: deleteStudent,
+    findStudents: findStudents,
 };
