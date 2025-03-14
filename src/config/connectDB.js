@@ -1,8 +1,13 @@
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const connectDB = async () => {
     try {
-        await mongoose.connect("mongodb+srv://thaidinhngan:GViyGm7n695luMEr@cluster0.2pn7q.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0");
+        await mongoose.connect(process.env.MONGO_URI, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        });
         console.log("Connect to database successfully");
     } catch (err) {
         console.error("Connect to database failed");
