@@ -1,14 +1,42 @@
+import CRUDService from '../services/CRUDService';
 
-let getHomePage = (req, res) => {
-    return res.render('homepage.ejs'); 
+let displayStudent = async (req, res) => {
+    try {
+        let data = await CRUDService.getAllStudent();
+        console.log('--------------------------');
+        console.log(data);
+        console.log('--------------------------');
+
+        return res.render('displayCRUD.ejs', {
+            dataTable: data,
+        });
+    } catch (e) {
+        console.log(e);
+        return res.status(500).send('An error occurred while fetching data');
+    }
 }
 
-let getAboutPage = (req, res) =>
-{ 
-    return res.render('test/about.ejs');
+let getCreateStudentPage = (req, res) => {
+    return res.render('createStudent.ejs');
 }
+
+let createStudent = async (req, res) => {
+    try {
+        let data = await CRUDService.createStudent(req.body);
+        console.log('--------------------------');
+        console.log(data);
+        console.log(req.body);
+        console.log('--------------------------');
+
+        return res.send('Create student successfully');
+    } catch (e) {
+        console.log(e);
+        return res.status(500).send('An error occurred while creating student');
+    }
+} 
 
 module.exports = {
-    getHomePage: getHomePage,
-    getAboutPage: getAboutPage,
+    displayStudent: displayStudent,
+    createStudent: createStudent,
+    getCreateStudentPage: getCreateStudentPage,
 }

@@ -1,0 +1,8 @@
+{
+  "development": {
+    "mongoUri": "mongodb+srv://thaidinhngan:GViyGm7n695luMEr@cluster0.2pn7q.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+  },
+  "production": {
+    "mongoUri": "mongodb+srv://<username>:<password>@cluster0.mongodb.net/myDatabase?retryWrites=true&w=majority"
+  }
+}
