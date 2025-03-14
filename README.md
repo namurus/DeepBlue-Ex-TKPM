@@ -6,20 +6,20 @@ Mô hình MVC:
 
 DeepBlue-Ex-TKPM/
 ├── src/
-│   ├── config/
+│   ├── config/         Các tệp cấu hình
 │   ├── controllers/    Viết logic backend cho ứng (API)
 │   ├── models/         Chứa model cho Student
 │   ├── routes/         Cài đặt các route cho chương trình (Định tuyến API)
-│   ├── seeders/    
+│   ├── seeders/        Dữ liệu mẫu khởi tạo cho cơ sở dữ liệu
 │   ├── services/       Các dịch vụ để xử lý trên Database MongoDB
 │   ├── views/          Chứa giao diện của ứng dụng
 │   └── server.js       File chính khởi động server
 ├── .babelrc
 ├── .env                Chứa biến môi trường
-├── .env.example        File .env mẫu 
+├── .env.example        File .env mẫu
 ├── package-lock.json
 ├── package.json
-└── README.md 
+└── README.md           Tài liệu hướng dẫn của project
 ```
 
 ## Hướng dẫn cài đặt & chạy chương trình
