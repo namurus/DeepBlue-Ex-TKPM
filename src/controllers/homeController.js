@@ -48,6 +48,7 @@ let createStudent = async (req, res) => {
 let getUpdateStudentPage = async (req, res) => {
     try {
         let student = await CRUDService.findStudents(req.query.studentId);
+        
         return res.render('updateStudent.ejs', {
             student: student[0]
         });
