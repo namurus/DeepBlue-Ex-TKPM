@@ -70,7 +70,7 @@ https://deepblue-ex-tkpm.onrender.com/get-student
 - Mỗi commit phải gắn với một task/subtask cụ thể  
 ![Commit](images/commit.png)
 - Cho phép đổi tên & thêm mới: khoa, tình trạng sinh viên, chương trình  
-![Rename and add](images/rename_and_add.png)
+![Add Faculty](images/add_faculty.png)
 - Thêm chức năng tìm kiếm:  tìm theo khoa, khoa + tên  
 ![Search](images/search.png)
 - Hỗ trợ import/export dữ liệu: CSV, JSON, XML, Excel (chọn ít nhất 2)  

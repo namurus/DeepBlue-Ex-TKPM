@@ -6,6 +6,7 @@ let displayStudent = async (req, res) => {
 
         if (req.query.studentId) {
             data = await CRUDService.findStudentById(req.query.studentId);
+        // Tìm kiếm sinh viên theo tên và khoa
         } else if (req.query.faculty) {
             if (req.query.name) {
                 data = await CRUDService.findStudentsByFacultyAndName(req.query.faculty, req.query.name);
