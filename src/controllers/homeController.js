@@ -41,19 +41,18 @@ let deleteStudent = async (req, res) => {
 
 let createStudent = async (req, res) => {
     try {
-        let { student, studentFaculty } = req.body;
-        let data = await CRUDService.createStudent(student, studentFaculty);
+        let data = await CRUDService.createStudent(req.body);
+        return res.redirect('/get-student');
 
-        // return res.redirect('/get-student');
     } catch (e) {
         console.log(e);
-        // return res.redirect('/get-student');
+        return res.redirect('/get-student');
     }
 }
 
 let getUpdateStudentPage = async (req, res) => {
     try {
-        let student = await CRUDService.findStudents(req.query.studentId);
+        let student = await CRUDService.findStudentById(req.query.studentId);
 
         return res.render('updateStudent.ejs', {
             student: student[0]

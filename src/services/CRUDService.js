@@ -46,20 +46,12 @@ const getAllStudents = async () => {
     }
 };
 
-const createStudent = async (student, studentFaculty) => {
-    const session = await Student.startSession();
-    session.startTransaction();
+const createStudent = async (student) => {
     try {
-        const newStudent = await Student.create([student], { session });
-        studentFaculty.studentId = newStudent[0]._id;
-        const newStudentFaculty = await StudentFaculty.create([studentFaculty], { session });
-        await session.commitTransaction();
-        session.endSession();
-        return { newStudent: newStudent[0], newStudentFaculty: newStudentFaculty[0] };
+        const newStudent = await Student.create(student);
+        return newStudent;
     } catch (error) {
-        await session.abortTransaction();
-        session.endSession();
-        console.error('Error creating student and student faculty:', error);
+        console.error('Error creating student:', error);
         throw error;
     }
 }
@@ -87,6 +79,21 @@ const updateStudent = async (student) => {
     }
 }
 
+const createFaculty = async (studentId, faculty) => {
+    try {
+        const student = await Student
+            .findOne({ studentId: studentId });
+        if (!student) {
+            throw new Error('Student not found');
+        }
+        const newFaculty = await StudentFaculty.create({ studentId: student._id, faculty });
+        return newFaculty;
+    }
+    catch (error) {
+        console.error('Error creating faculty:', error);
+        throw error;
+    }
+}
 module.exports = {
     getAllStudents: getAllStudents,
     createStudent: createStudent,
@@ -94,5 +101,6 @@ module.exports = {
     findStudentById: findStudentById,
     findStudentsByFaculty: findStudentsByFaculty,
     findStudentsByFacultyAndName: findStudentsByFacultyAndName,
-    updateStudent: updateStudent
+    updateStudent: updateStudent,
+    createFaculty: createFaculty
 };
