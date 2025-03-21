@@ -89,7 +89,7 @@
                                     <div id="dropdown-<%= dataTable[i].studentId %>"
                                         class="hidden absolute bg-white border rounded shadow-md mt-1 w-32">
                                         <a href="javascript:void(0);"
-                                            onclick="showStudentDetails(<%= JSON.stringify(dataTable[i]) %>)"
+                                            onclick="showStudentDetails('<%= dataTable[i].studentId  %>')"
                                             class="block px-4 py-2 text-gray-800 hover:bg-gray-100">View Detail</a>
 
                                         <a href="/update-student?studentId=<%= dataTable[i].studentId %>"
@@ -144,7 +144,7 @@
         </div>
 
         <script>
-            const dataTable = <% - JSON.stringify(dataTable) %>;
+            const dataTable = JSON.parse('<%- JSON.stringify(dataTable) %>');
             function toggleDropdown(studentId) {
                 const dropdown = document.getElementById(`dropdown-${studentId}`);
                 dropdown.classList.toggle('hidden');
@@ -159,7 +159,11 @@
                 });
             });
 
-            function showStudentDetails(student) {
+            function showStudentDetails(studentId) {
+                const student = dataTable.find(student => student.studentId === studentId);
+                if (!student) {
+                    return;
+                }
                 document.getElementById("detailStudentId").innerText = student.studentId;
                 document.getElementById("detailFullName").innerText = student.fullName;
                 document.getElementById("detailDateOfBirth").innerText = new Date(student.dateOfBirth).toLocaleDateString();
