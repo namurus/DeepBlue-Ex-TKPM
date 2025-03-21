@@ -122,6 +122,22 @@
                     <p><strong>Khóa:</strong> <span id="detailCourse"></span></p>
                     <p><strong>Chương trình:</strong> <span id="detailProgram"></span></p>
                     <p><strong>Địa chỉ:</strong> <span id="detailAddress"></span></p>
+                    <p><strong>Địa chỉ thường trú:</strong> <span id="detailPermanentAddress"></span></p>
+                    <p><strong>Địa chỉ tạm trú:</strong> <span id="detailCurrentAddress"></span></p>
+                    <p><strong>Địa chỉ nhận thư:</strong> <span id="detailMailingAddress"></span></p>
+
+                    <p><strong>CCCD/CMND/Hộ chiếu:</strong></p>
+                    <ul class="pl-4 list-disc">
+                        <li><strong>Loại:</strong> <span id="detailDocType"></span></li>
+                        <li><strong>Số:</strong> <span id="detailDocNumber"></span></li>
+                        <li><strong>Ngày cấp:</strong> <span id="detailIssuedDate"></span></li>
+                        <li><strong>Ngày hết hạn:</strong> <span id="detailExpiryDate"></span></li>
+                        <li><strong>Nơi cấp:</strong> <span id="detailIssuedPlace"></span></li>
+                        <li><strong>Gắn chip:</strong> <span id="detailHasChip"></span></li>
+                        <li><strong>Quốc gia cấp:</strong> <span id="detailCountryIssue"></span></li>
+                        <li><strong>Ghi chú:</strong> <span id="detailNote"></span></li>
+                    </ul>
+                    <p><strong>Quốc tịch:</strong> <span id="detailNationality"></span></p>
                     <p><strong>Email:</strong> <span id="detailEmail"></span></p>
                     <p><strong>Số điện thoại:</strong> <span id="detailPhoneNumber"></span></p>
                     <p><strong>Tình trạng:</strong> <span id="detailStudentStatus"></span></p>
@@ -168,12 +184,37 @@
                 document.getElementById("detailFullName").innerText = student.fullName;
                 document.getElementById("detailDateOfBirth").innerText = new Date(student.dateOfBirth).toLocaleDateString();
                 document.getElementById("detailGender").innerText = student.gender;
-                document.getElementById("detailFaculty").innerText = student.faculty;
-                document.getElementById("detailCourse").innerText = student.course;
-                document.getElementById("detailProgram").innerText = student.program;
-                document.getElementById("detailAddress").innerText = student.address;
-                document.getElementById("detailEmail").innerText = student.email;
-                document.getElementById("detailPhoneNumber").innerText = student.phoneNumber;
+                document.getElementById("detailFaculty").innerText = student.faculty || '';
+                document.getElementById("detailCourse").innerText = student.course || '';
+                document.getElementById("detailProgram").innerText = student.program || '';
+                document.getElementById("detailAddress").innerText = student.address || '';
+                document.getElementById("detailPermanentAddress").innerText = student.permanentAddress.street + ', ' +
+                    student.permanentAddress.ward + ', ' +
+                    student.permanentAddress.district + ', ' +
+                    student.permanentAddress.city + ', ' +
+                    student.permanentAddress.country
+                document.getElementById("detailCurrentAddress").innerText = student.currentAddress.street + ', ' +
+                    student.currentAddress.ward + ', ' +
+                    student.currentAddress.district + ', ' +
+                    student.currentAddress.city + ', ' +
+                    student.currentAddress.country
+                document.getElementById("detailMailingAddress").innerText = student.mailingAddress + ', ' +
+                    student.mailingAddress.ward + ', ' +
+                    student.mailingAddress.district + ', ' +
+                    student.mailingAddress.city + ', ' +
+                    student.mailingAddress.country
+                document.getElementById("detailDocType").innerText = student.identityDocument.type;
+                document.getElementById("detailDocNumber").innerText = student.identityDocument.number;
+                document.getElementById("detailIssuedDate").innerText = new Date(student.identityDocument.issuedDate).toLocaleDateString();
+                document.getElementById("detailExpiryDate").innerText = new Date(student.identityDocument.expiryDate).toLocaleDateString();
+                document.getElementById("detailIssuedPlace").innerText = student.identityDocument.issuedPlace;
+                document.getElementById("detailHasChip").innerText = student.identityDocument.hasChip ? 'Có' : 'Không';
+                document.getElementById("detailCountryIssue").innerText = student.identityDocument.countryIssue || '';
+                document.getElementById("detailNote").innerText = student.identityDocument.note || '';
+
+                document.getElementById("detailNationality").innerText = student.nationality;
+                document.getElementById("detailEmail").innerText = student.email || '';
+                document.getElementById("detailPhoneNumber").innerText = student.phoneNumber || '';
                 document.getElementById("detailStudentStatus").innerText = student.studentStatus;
                 document.getElementById("detailDialog").classList.remove("hidden");
             }
