@@ -1,5 +1,5 @@
 const Student = require('../models/student.model');
-
+const StudentFaculty = require('../models/student_faculty.model');
 const findStudents = async (studentId) => {
     try {
         const student = await
@@ -14,7 +14,7 @@ const findStudents = async (studentId) => {
 
 const getAllStudents = async () => {
     try {
-        const students = await Student.find({});
+        const students = await Student.find({}).populate('studentFaculties');
         return students;
     } catch (error) {
         console.error('Error fetching students:', error);
@@ -22,12 +22,20 @@ const getAllStudents = async () => {
     }
 };
 
-const createStudent = async (student) => {
+const createStudent = async (student, studentFaculty) => {
+    const session = await Student.startSession();
+    session.startTransaction();
     try {
-        const newStudent = await Student.create(student);
-        return newStudent;
+        const newStudent = await Student.create([student], { session });
+        studentFaculty.studentId = newStudent[0]._id;
+        const newStudentFaculty = await StudentFaculty.create([studentFaculty], { session });
+        await session.commitTransaction();
+        session.endSession();
+        return { newStudent: newStudent[0], newStudentFaculty: newStudentFaculty[0] };
     } catch (error) {
-        console.error('Error creating student:', error);
+        await session.abortTransaction();
+        session.endSession();
+        console.error('Error creating student and student faculty:', error);
         throw error;
     }
 }
