@@ -79,14 +79,14 @@ const updateStudent = async (student) => {
     }
 }
 
-const createFaculty = async (studentId, faculty) => {
+const createFaculty = async (studentId, facultyData) => {
     try {
         const student = await Student
             .findOne({ studentId: studentId });
         if (!student) {
             throw new Error('Student not found');
         }
-        const newFaculty = await StudentFaculty.create({ studentId: student._id, faculty });
+        const newFaculty = await StudentFaculty.create({ studentId: student._id, faculty: facultyData.faculty, program: facultyData.program, studentStatus: facultyData.studentStatus });
         return newFaculty;
     }
     catch (error) {

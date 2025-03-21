@@ -94,6 +94,8 @@
 
                                         <a href="/update-student?studentId=<%= dataTable[i].studentId %>"
                                             class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Edit</a>
+                                        <a href="add-faculty?studentId=<%= dataTable[i].studentId %>"
+                                            class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Add Faculty</a>
                                         <form action="/delete-student?id=<%= dataTable[i].studentId %>" method="POST"
                                             class="block">
                                             <input type="hidden" name="_method" value="DELETE">

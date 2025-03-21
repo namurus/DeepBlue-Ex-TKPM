@@ -63,6 +63,29 @@ let getUpdateStudentPage = async (req, res) => {
     }
 }
 
+let getAddFacultyPage = async (req, res) => {
+    try {
+        const studentId = req.query.studentId;
+        return res.render('addFaculty.ejs', {
+            studentId: studentId
+        }); 
+    } catch (e) {
+        console.log(e);
+        return res.status(500).send('An error occurred while adding faculty');
+    }
+}
+
+let addFaculty = async (req, res) => {
+    try {
+    const {faculty, program, studentStatus} = req.body;
+    let data = await CRUDService.createFaculty(req.query.studentId, {faculty, program, studentStatus});
+        return res.redirect('/get-student');
+    } catch (e) {
+        console.log(e);
+        return res.status(500).send('An error occurred while adding faculty');
+    }
+}
+
 let updateStudent = async (req, res) => {
     try {
         let data = await CRUDService.updateStudent(req.body);
@@ -80,5 +103,7 @@ module.exports = {
     getCreateStudentPage: getCreateStudentPage,
     deleteStudent: deleteStudent,
     updateStudent: updateStudent,
-    getUpdateStudentPage: getUpdateStudentPage
+    getUpdateStudentPage: getUpdateStudentPage,
+    getAddFacultyPage: getAddFacultyPage,
+    addFaculty: addFaculty,
 }

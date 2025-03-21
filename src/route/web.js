@@ -9,6 +9,8 @@ let initWebRoutes = (app) => {
     router.post("/delete-student", homeController.deleteStudent);
     router.get("/update-student", homeController.getUpdateStudentPage);
     router.post("/update-student", homeController.updateStudent);
+    router.get("/add-faculty", homeController.getAddFacultyPage);
+    router.post("/add-faculty", homeController.addFaculty);
     return app.use("/", router);
 }
 
