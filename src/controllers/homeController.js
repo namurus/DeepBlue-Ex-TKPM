@@ -5,7 +5,12 @@ let displayStudent = async (req, res) => {
         let data;
 
         if (req.query.studentId) {
-            data = await CRUDService.findStudents(req.query.studentId);
+            data = await CRUDService.findStudentById(req.query.studentId);
+        } else if (req.query.faculty) {
+            if (req.query.name) {
+                data = await CRUDService.findStudentsByFacultyAndName(req.query.faculty, req.query.name);
+            }
+            else { data = await CRUDService.findStudentsByFaculty(req.query.faculty); }
         } else {
             data = await CRUDService.getAllStudents();
         }
@@ -49,7 +54,7 @@ let createStudent = async (req, res) => {
 let getUpdateStudentPage = async (req, res) => {
     try {
         let student = await CRUDService.findStudents(req.query.studentId);
-        
+
         return res.render('updateStudent.ejs', {
             student: student[0]
         });
