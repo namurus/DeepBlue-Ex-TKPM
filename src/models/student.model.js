@@ -61,10 +61,19 @@ const studentSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    studentFaculties: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'StudentFaculty'
-    }]
+    faculty: {
+        type: String,
+        required: true
+    },
+    program: {
+        type: String,
+        required: true
+    },
+    studentStatus: {
+        type: String,
+        required: true,
+        enum: ["Đang học", "Đã tốt nghiệp", "Đã thôi học", "Tạm dừng học"]
+    },
 });
 
 const Student = mongoose.model('Student', studentSchema);

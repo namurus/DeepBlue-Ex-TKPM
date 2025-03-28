@@ -1,5 +1,4 @@
 const Student = require('../models/student.model');
-const StudentFaculty = require('../models/student_faculty.model');
 const findStudentById = async (studentId) => {
     try {
         const student = await
@@ -69,31 +68,29 @@ const deleteStudent = async (studentId) => {
 const updateStudent = async (student) => {
     try {
         const studentId = student.studentId;
+        const prevStudent = await Student.findOne({ studentId: studentId });
+        if(prevStudent.studentStatus === 'Đã tốt nghiệp')
+        {
+            throw new Error('Sinh viên đã tốt nghiệp!');
+        }
+        if(prevStudent.studentStatus === 'Đã thôi học')
+        {
+            throw new Error('Sinh viên đã thôi học!');
+        }
+        if(prevStudent.studentStatus === 'Tạm dừng học' && student.studentStatus !== 'Đã tốt nghiệp')
+        {
+            throw new Error('Sinh viên đang tạm dừng học!');
+        }
         const updatedStudent = await Student.findOneAndUpdate({ studentId: studentId }, student, { new: true });
 
         return updatedStudent;
     }
     catch (error) {
-        console.error('Error updating student:', error);
+        console.error('Gặp lỗi khi cập nhật thông tin sinh viên:', error);
         throw error;
     }
 }
 
-const createFaculty = async (studentId, facultyData) => {
-    try {
-        const student = await Student
-            .findOne({ studentId: studentId });
-        if (!student) {
-            throw new Error('Student not found');
-        }
-        const newFaculty = await StudentFaculty.create({ studentId: student._id, faculty: facultyData.faculty, program: facultyData.program, studentStatus: facultyData.studentStatus });
-        return newFaculty;
-    }
-    catch (error) {
-        console.error('Error creating faculty:', error);
-        throw error;
-    }
-}
 module.exports = {
     getAllStudents: getAllStudents,
     createStudent: createStudent,
@@ -102,5 +99,4 @@ module.exports = {
     findStudentsByFaculty: findStudentsByFaculty,
     findStudentsByFacultyAndName: findStudentsByFacultyAndName,
     updateStudent: updateStudent,
-    createFaculty: createFaculty
 };
