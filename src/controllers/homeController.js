@@ -43,11 +43,11 @@ let deleteStudent = async (req, res) => {
 let createStudent = async (req, res) => {
     try {
 
-        const studentId = req.body.student.studentId;  
+        const studentId = req.body.studentId;  
         if(findStudentById(studentId)) {    
             return res.status(400).send('Student ID already exists');
         }
-        let data = await CRUDService.createStudent(req.body.student);
+        let data = await CRUDService.createStudent(req.body);
 
         return res.redirect('/get-student');
 
