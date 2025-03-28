@@ -80,3 +80,30 @@ https://deepblue-ex-tkpm.onrender.com/get-student
 
 ### Tạo Tag Phiên Bản `v2.0`
 ![Tag 2.0](images/tag_2_0.png)
+
+
+## Hướng dẫn sử dụng **Version 3.0**
+- Mở terminal và chạy lệnh `npm install` để cài đặt tất cả các package từ package.json:
+```
+npm install
+```
+- Sau khi tải xong, dùng lệnh `npm start` để chạy chương trình:
+```
+npm start
+```
+- Chương trình web sẽ được host local tại port theo cài đặt trong file .env, ví dụ:
+```
+http://localhost:5134/get-create-student
+```
+- Có thể truy cập trang web đã được host tại link:
+```
+https://deepblue-ex-tkpm.onrender.com/get-student
+```
+
+### Minh chứng các tính năng:
+- MSSV phải là duy nhất  
+![Check Student Id](images/checkExistStudentID.png)
+- Email phải thuộc một tên miền nhất định  
+![Email Domain](images/checkInvalidDomain.png)
+- Tình trạng sinh viên chỉ có thể thay đổi theo một số quy tắc (Chưa hoàn thiện UI/UX).
+![Student Status Update](images/validateStudentStatusUpdate.png)
