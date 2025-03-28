@@ -8,169 +8,96 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
 </head>
 
-<body>
+<body class="bg-gray-100">
     <div class="container mx-auto p-8">
         <div class="flex justify-center">
-            <form action="/create-student" method="POST" class="w-full max-w-lg bg-white p-6 rounded-lg shadow-md">
-                <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">
-                    Thông tin sinh viên
-                </h2>
-
-                <!-- Mã số sinh viên -->
-                <div class="mb-4">
-                    <label class="block text-gray-700 text-sm font-bold mb-2" for="studentId">Mã số sinh viên</label>
-                    <input type="text" name="studentId" required
-                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        placeholder="Mã số sinh viên" />
+            <form action="/create-student" method="POST" class="w-full max-w-3xl bg-white p-6 rounded-lg shadow-md">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Thông tin sinh viên</h2>
+                
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="studentId">Mã số sinh viên</label>
+                        <input type="text" name="studentId" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Mã số sinh viên" />
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="fullName">Họ tên</label>
+                        <input type="text" name="fullName" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Họ tên" />
+                    </div>
                 </div>
-
-                <!-- Họ tên -->
-                <div class="mb-4">
-                    <label class="block text-gray-700 text-sm font-bold mb-2" for="fullName">Họ tên</label>
-                    <input type="text" name="fullName" required
-                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        placeholder="Họ tên" />
-                </div>
-
-                <!-- Ngày tháng năm sinh -->
-                <div class="mb-4">
-                    <label class="block text-gray-700 text-sm font-bold mb-2" for="dateOfBirth">Ngày tháng năm
-                        sinh</label>
-                    <input type="date" name="dateOfBirth" required
-                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
-                </div>
-
-                <!-- Giới tính -->
-                <div class="mb-4">
-                    <label class="block text-gray-700 text-sm font-bold mb-2" for="gender">Giới tính</label>
-                    <div class="relative">
-                        <select name="gender" required
-                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                            <option value="Nam">Nam</option>
-                            <option value="Nữ">Nữ</option>
+                
+                <div class="grid grid-cols-2 gap-4 mt-4">
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="dateOfBirth">Ngày sinh</label>
+                        <input type="date" name="dateOfBirth" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="gender">Giới tính</label>
+                        <select name="gender" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            <option value="Male">Nam</option>
+                            <option value="Female">Nữ</option>
                         </select>
-                        <div
-                            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 text-xs">
-                            ▼
-                        </div>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-4 mt-4">
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="course">Khóa</label>
+                        <input type="text" name="course" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Khóa" />
+                    </div>
+
+                </div>
+                
+                <h3 class="text-xl font-semibold text-gray-800 mt-6">Thông tin CCCD</h3>
+                <div class="grid grid-cols-2 gap-4 mt-2">
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="identityNumber">Số CCCD</label>
+                        <input type="text" name="identityNumber" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Số giấy tờ" />
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="identityIssuedPlace">Nơi cấp</label>
+                        <input type="text" name="identityIssuedPlace" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Nơi cấp" />
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4 mt-2">
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="identityIssuedDate">Ngày cấp</label>
+                        <input type="date" name="identityIssuedDate" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="identityExpiryDate">Ngày hết hạn</label>
+                        <input type="date" name="identityExpiryDate" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
                     </div>
                 </div>
 
-                <!-- Khoa
-                <div class="mb-4 relative">
-                    <label class="block text-gray-700 text-sm font-bold mb-2" for="faculty">Khoa</label>
-                    <div class="relative">
-                        <select name="faculty" required
-                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline hover:cursor-pointer">
-                            <option value="Khoa Luật">Khoa Luật</option>
-                            <option value="Khoa Tiếng Anh thương mại">
-                                Khoa Tiếng Anh thương mại
-                            </option>
-                            <option value="Khoa Tiếng Nhật">Khoa Tiếng Nhật</option>
-                            <option value="Khoa Tiếng Pháp">Khoa Tiếng Pháp</option>
-                        </select>
-                        <div
-                            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 text-xs">
-                            ▼
-                        </div>
+                
+                <h3 class="text-xl font-semibold text-gray-800 mt-6">Thông tin liên hệ</h3>
+                <div class="grid grid-cols-2 gap-4 mt-2">
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email</label>
+                        <input type="email" name="email" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Email" />
                     </div>
-                </div> -->
-
-                <!-- Khóa -->
-                <div class="mb-4">
-                    <label class="block text-gray-700 text-sm font-bold mb-2" for="course">Khóa</label>
-                    <input type="text" name="course" required
-                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        placeholder="Khóa" />
-                </div>
-
-                <!-- Chương trình
-                <div class="mb-4">
-                    <label class="block text-gray-700 text-sm font-bold mb-2" for="program">Chương trình</label>
-                    <input type="text" name="program" required
-                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        placeholder="Chương trình" />
-                </div> -->
-
-                <!-- Địa chỉ -->
-                <div class="mb-4">
-                    <label class="block text-gray-700 text-sm font-bold mb-2" for="address">Địa chỉ</label>
-                    <input type="text" name="address" required
-                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        placeholder="Địa chỉ" />
-                </div>
-
-                
-
-                <!-- Email -->
-                <div class="mb-4">
-                    <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email</label>
-                    <input type="email" name="email" required
-                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        placeholder="Email" />
-                </div>
-
-                <!-- Số điện thoại -->
-                <div class="mb-4">
-                    <label class="block text-gray-700 text-sm font-bold mb-2" for="phoneNumber">Số điện thoại liên
-                        hệ</label>
-                    <input type="text" name="phoneNumber" required
-                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        placeholder="Số điện thoại liên hệ" />
-                </div>
-
-                <!-- Tình trạng sinh viên
-                <div class="mb-4">
-                    <label class="block text-gray-700 text-sm font-bold mb-2" for="status">Tình trạng sinh viên</label>
-                    <div class="relative">
-                        <select name="studentStatus" required
-                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                            <option value="Đang học">Đang học</option>
-                            <option value="Đã tốt nghiệp">Đã tốt nghiệp</option>
-                            <option value="Đã thôi học">Đã thôi học</option>
-                            <option value="Tạm dừng học">Tạm dừng học</option>
-                        </select>
-                        <div
-                            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 text-xs">
-                            ▼
-                        </div>
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="phoneNumber">Số điện thoại</label>
+                        <input type="text" name="phoneNumber" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Số điện thoại" />
                     </div>
-                </div> -->
-
-                                <!-- CCCD -->
-                                <div class="mb-4">
-                                    <label class="block text-gray-700 text-sm font-bold mb-2" for="cccd">CCCD</label>
-                                    <input type="text" name="cccd" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="CCCD" />
-                                </div>
+                </div>
                 
-                                <!-- Quốc tịch -->
-                                <div class="mb-4">
-                                    <label class="block text-gray-700 text-sm font-bold mb-2" for="nationality">Quốc tịch</label>
-                                    <input type="text" name="nationality" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Quốc tịch" />
-                                </div>
+                <h3 class="text-xl font-semibold text-gray-800 mt-6">Địa chỉ</h3>
+                <div class="mt-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="permanentAddress">Địa chỉ thường trú</label>
+                    <input type="text" name="permanentAddress" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Địa chỉ thường trú" />
+                </div>
+                <div class="mt-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="currentAddress">Địa chỉ hiện tại</label>
+                    <input type="text" name="currentAddress" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Địa chỉ hiện tại" />
+                </div>
+                <div class="mt-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="mailingAddress">Địa chỉ liên hệ</label>
+                    <input type="text" name="mailingAddress" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Địa chỉ liên hệ" />
+                </div>
                 
-                                <!-- Địa chỉ thường trú -->
-                                <div class="mb-4">
-                                    <label class="block text-gray-700 text-sm font-bold mb-2" for="permanentAddress">Địa chỉ thường trú</label>
-                                    <input type="text" name="permanentAddress" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Địa chỉ thường trú" />
-                                </div>
-                
-                                <!-- Địa chỉ tạm trú -->
-                                <div class="mb-4">
-                                    <label class="block text-gray-700 text-sm font-bold mb-2" for="temporaryAddress">Địa chỉ tạm trú</label>
-                                    <input type="text" name="temporaryAddress" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Địa chỉ tạm trú" />
-                                </div>
-                
-                                <!-- Địa chỉ thư -->
-                                <div class="mb-4">
-                                    <label class="block text-gray-700 text-sm font-bold mb-2" for="mailingAddress">Địa chỉ thư</label>
-                                    <input type="text" name="mailingAddress" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Địa chỉ thư" />
-                                </div>
-
-                <!-- Nút Submit -->
-                <div class="flex items-center justify-center">
-                    <button type="submit"
-                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline">
+                <div class="flex items-center justify-center mt-6">
+                    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline">
                         Gửi
                     </button>
                 </div>
@@ -178,14 +105,13 @@
         </div>
     </div>
 </body>
-
 </html>
 
 <script>
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.has('success')) {
         alert('Thêm sinh viên thành công!');
-        window.location.href = '/get-create-student'; // Reload trang sau khi nhấn OK
+        window.location.href = '/get-create-student';
     } else if (urlParams.has('error')) {
         alert('Có lỗi xảy ra, vui lòng thử lại!');
     }
