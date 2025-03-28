@@ -1,7 +1,7 @@
 import { body, validationResult } from 'express-validator';
 import fs from 'fs';
 
-const config = JSON.parse(fs.readFileSync('../config/allowEmailDomain.json', 'utf8'));
+const config = JSON.parse(fs.readFileSync('./src/config/allowEmailDomain.json', 'utf8'));
 const allowedDomain = config.allowedDomain;
 
 const validateEmailDomain = (value) => {
@@ -16,7 +16,8 @@ const validateRegistration = [
     (req, res, next) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() });
+            // Truyền lỗi sang EJS
+            return res.render('createStudent.ejs', { errors: errors.array() });
         }
         next();
     },

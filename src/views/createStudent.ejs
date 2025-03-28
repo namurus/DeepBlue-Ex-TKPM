@@ -9,6 +9,7 @@
 </head>
 
 <body class="bg-gray-100">
+    
     <div class="container mx-auto p-8">
         <div class="flex justify-center">
             <form action="/create-student" method="POST" class="w-full max-w-3xl bg-white p-6 rounded-lg shadow-md">
@@ -111,7 +112,7 @@
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.has('success')) {
         alert('Thêm sinh viên thành công!');
-        window.location.href = '/get-create-student';
+        window.location.href = '/create-student';
     } else if (urlParams.has('error')) {
         alert('Có lỗi xảy ra, vui lòng thử lại!');
     }

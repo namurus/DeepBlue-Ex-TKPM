@@ -13,8 +13,7 @@ const findStudentById = async (studentId) => {
 
 const findStudentsByFaculty = async (faculty) => {
     try {
-        const students = await StudentFaculty.find({ faculty })
-            .populate('studentId'); 
+        const students = await StudentFaculty.find({ faculty: faculty });
 
         return students.map(sf => sf.studentId); 
     } catch (error) {
@@ -37,7 +36,7 @@ const findStudentsByFacultyAndName = async (faculty, name) => {
 
 const getAllStudents = async () => {
     try {
-        const students = await Student.find({}).populate('studentFaculties');
+        const students = await Student.find({});
         return students;
     } catch (error) {
         console.error('Error fetching students:', error);

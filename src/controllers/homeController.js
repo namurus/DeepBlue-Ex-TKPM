@@ -1,4 +1,5 @@
 import CRUDService, { findStudentById } from '../services/CRUDService';
+import Student from '../models/student.model';
 
 let displayStudent = async (req, res) => {
     try {
@@ -6,7 +7,7 @@ let displayStudent = async (req, res) => {
 
         if (req.query.studentId) {
             data = await CRUDService.findStudentById(req.query.studentId);
-        // Tìm kiếm sinh viên theo tên và khoa
+            // Tìm kiếm sinh viên theo tên và khoa
         } else if (req.query.faculty) {
             if (req.query.name) {
                 data = await CRUDService.findStudentsByFacultyAndName(req.query.faculty, req.query.name);
@@ -42,17 +43,15 @@ let deleteStudent = async (req, res) => {
 
 let createStudent = async (req, res) => {
     try {
-
-        const studentId = req.body.studentId;  
-        if(findStudentById(studentId)) {    
-            return res.status(400).send('Student ID already exists');
+        const studentId = req.body.studentId;
+        console.log(studentId);
+        if (await Student.findOne({ studentId: studentId })) {
+            return res.render('createStudent.ejs', { errors: [{ msg: "Sinh viên đã tồn tại" }] });
         }
         let data = await CRUDService.createStudent(req.body);
-
         return res.redirect('/get-student');
 
     } catch (e) {
-        console.log(e);
         return res.redirect('/get-student');
     }
 }
@@ -75,7 +74,7 @@ let getAddFacultyPage = async (req, res) => {
         const studentId = req.query.studentId;
         return res.render('addFaculty.ejs', {
             studentId: studentId
-        }); 
+        });
     } catch (e) {
         console.log(e);
         return res.status(500).send('An error occurred while adding faculty');
@@ -84,8 +83,8 @@ let getAddFacultyPage = async (req, res) => {
 
 let addFaculty = async (req, res) => {
     try {
-    const {faculty, program, studentStatus} = req.body;
-    let data = await CRUDService.createFaculty(req.query.studentId, {faculty, program, studentStatus});
+        const { faculty, program, studentStatus } = req.body;
+        let data = await CRUDService.createFaculty(req.query.studentId, { faculty, program, studentStatus });
         return res.redirect('/get-student');
     } catch (e) {
         console.log(e);
