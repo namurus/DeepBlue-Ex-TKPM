@@ -45,11 +45,11 @@ const studentSchema = new mongoose.Schema({
         required: true
     },
 
-    identityType: {
-        type: String,
-        enum: ["CMND", "CCCD", "Hộ chiếu"],
-        required: true
-    },
+    // identityType: {
+    //     type: String,
+    //     enum: ["CMND", "CCCD", "Hộ chiếu"],
+    //     required: true
+    // },
     identityNumber: { type: String, required: true, unique: true },
     identityIssuedDate: { type: Date, required: true },
     identityExpiryDate: { type: Date },
