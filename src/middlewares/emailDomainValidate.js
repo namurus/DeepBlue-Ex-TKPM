@@ -17,7 +17,7 @@ const validateRegistration = [
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             // Truyền lỗi sang EJS
-            return res.render('createStudent.ejs', { errors: errors.array() });
+            return res.redirect('/create-student?error=email_domain');
         }
         next();
     },

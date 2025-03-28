@@ -1,5 +1,5 @@
 import express from "express"
-import homeController from "../controllers/homeController";
+import homeController from "../controllers/studentController";
 import validateRegistration from "../middlewares/emailDomainValidate";
 import facultyRoute from "./facultyRoute";
 let router = express.Router();

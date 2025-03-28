@@ -176,10 +176,22 @@
 
 <script>
     const urlParams = new URLSearchParams(window.location.search);
+
     if (urlParams.has('success')) {
         alert('Thêm sinh viên thành công!');
         window.location.href = '/create-student';
     } else if (urlParams.has('error')) {
-        alert('Có lỗi xảy ra, vui lòng thử lại!');
+        let errorType = urlParams.get('error');
+        let errorMessage = "Có lỗi xảy ra, vui lòng thử lại!";
+
+        if (errorType === 'exists') {
+            errorMessage = "Sinh viên đã tồn tại!";
+        } else if(errorType === 'email_domain'){
+            errorMessage = "Tên miền email không hợp lệ!"
+        } else if (errorType === 'server') {
+            errorMessage = "Lỗi máy chủ, vui lòng thử lại sau!";
+        }
+
+        alert(errorMessage);
     }
 </script>

@@ -1,4 +1,4 @@
-import CRUDService, { findStudentById } from '../services/CRUDService';
+import studentService from '../services/studentService';
 import Student from '../models/student.model';
 
 let displayStudent = async (req, res) => {
@@ -6,15 +6,15 @@ let displayStudent = async (req, res) => {
         let data;
 
         if (req.query.studentId) {
-            data = await CRUDService.findStudentById(req.query.studentId);
+            data = await studentService.findStudentById(req.query.studentId);
             // Tìm kiếm sinh viên theo tên và khoa
         } else if (req.query.faculty) {
             if (req.query.name) {
-                data = await CRUDService.findStudentsByFacultyAndName(req.query.faculty, req.query.name);
+                data = await studentService.findStudentsByFacultyAndName(req.query.faculty, req.query.name);
             }
-            else { data = await CRUDService.findStudentsByFaculty(req.query.faculty); }
+            else { data = await studentService.findStudentsByFaculty(req.query.faculty); }
         } else {
-            data = await CRUDService.getAllStudents();
+            data = await studentService.getAllStudents();
         }
 
         return res.render('displayStudent.ejs', {
@@ -33,7 +33,7 @@ let getCreateStudentPage = (req, res) => {
 
 let deleteStudent = async (req, res) => {
     try {
-        let data = await CRUDService.deleteStudent(req.query.id);
+        let data = await studentService.deleteStudent(req.query.id);
         return res.redirect('/get-student');
     } catch (e) {
         console.log(e);
@@ -45,20 +45,23 @@ let createStudent = async (req, res) => {
     try {
         const studentId = req.body.studentId;
         console.log(studentId);
+
         if (await Student.findOne({ studentId: studentId })) {
-            return res.render('createStudent.ejs', { errors: [{ msg: "Sinh viên đã tồn tại" }] });
+            return res.redirect('/create-student?error=exists');
         }
-        let data = await CRUDService.createStudent(req.body);
-        return res.redirect('/get-student');
+
+        await studentService.createStudent(req.body);
+        return res.redirect('/create-student?success=true');
 
     } catch (e) {
-        return res.redirect('/get-student');
+        console.error(e); // Log lỗi ra console
+        return res.redirect('/create-student?error=server');
     }
-}
+};
 
 let getUpdateStudentPage = async (req, res) => {
     try {
-        let student = await CRUDService.findStudentById(req.query.studentId);
+        let student = await studentService.findStudentById(req.query.studentId);
 
         return res.render('updateStudent.ejs', {
             student: student[0]
@@ -69,32 +72,10 @@ let getUpdateStudentPage = async (req, res) => {
     }
 }
 
-let getAddFacultyPage = async (req, res) => {
-    try {
-        const studentId = req.query.studentId;
-        return res.render('addFaculty.ejs', {
-            studentId: studentId
-        });
-    } catch (e) {
-        console.log(e);
-        return res.status(500).send('An error occurred while adding faculty');
-    }
-}
-
-let addFaculty = async (req, res) => {
-    try {
-        const { faculty, program, studentStatus } = req.body;
-        let data = await CRUDService.createFaculty(req.query.studentId, { faculty, program, studentStatus });
-        return res.redirect('/get-student');
-    } catch (e) {
-        console.log(e);
-        return res.status(500).send('An error occurred while adding faculty');
-    }
-}
 
 let updateStudent = async (req, res) => {
     try {
-        let data = await CRUDService.updateStudent(req.body);
+        let data = await studentService.updateStudent(req.body);
         return res.redirect('/get-student');
     }
     catch (e) {
@@ -110,6 +91,4 @@ module.exports = {
     deleteStudent: deleteStudent,
     updateStudent: updateStudent,
     getUpdateStudentPage: getUpdateStudentPage,
-    getAddFacultyPage: getAddFacultyPage,
-    addFaculty: addFaculty,
 }
