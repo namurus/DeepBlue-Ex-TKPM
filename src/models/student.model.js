@@ -1,28 +1,5 @@
 const mongoose = require('mongoose');
 
-const addressSchema = new mongoose.Schema({
-    street: {
-        type: String,
-        required: true
-    },
-    ward: {
-        type: String,
-        required: true
-    },
-    district: {
-        type: String,
-        required: true
-    },
-    city: {
-        type: String,
-        required: true
-    },
-    country: {
-        type: String,
-        required: true
-    }
-
-});
 
 const studentSchema = new mongoose.Schema({
     studentId: {
@@ -46,9 +23,18 @@ const studentSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    permanentAddress: addressSchema,
-    currentAddress: addressSchema,
-    mailingAddress: addressSchema,
+    permanentAddress: {
+        type: String,
+        required: true,
+    },
+    currentAddress: {
+        type: String,
+        required: true
+    },
+    mailingAddress: {
+        type: String,
+        required: true
+    },
     email: {
         type: String,
         required: true,
@@ -58,20 +44,19 @@ const studentSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    identityDocument: {
-        type: {
-            type: String,
-            enum: ["CMND", "CCCD", "Hộ chiếu"],
-            required: true
-        },
-        number: { type: String, required: true, unique: true },
-        issuedDate: { type: Date, required: true },
-        expiryDate: { type: Date },
-        issuedPlace: { type: String, required: true },
-        country: { type: String }, // Chỉ dùng cho passport
-        hasChip: { type: Boolean }, // Chỉ dùng cho CCCD
-        notes: { type: String } // Chỉ dùng cho passport nếu có ghi chú
+
+    identityType: {
+        type: String,
+        enum: ["CMND", "CCCD", "Hộ chiếu"],
+        required: true
     },
+    identityNumber: { type: String, required: true, unique: true },
+    identityIssuedDate: { type: Date, required: true },
+    identityExpiryDate: { type: Date },
+    identityIssuedPlace: { type: String, required: true },
+    identityCountry: { type: String, required: false }, // Chỉ dùng cho passport
+    identityHasChip: { type: Boolean, required: false }, // Chỉ dùng cho CCCD
+    identityNotes: { type: String, required: false }, // Chỉ dùng cho passport nếu có ghi chú
     nationality: {
         type: String,
         required: true

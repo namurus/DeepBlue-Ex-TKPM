@@ -1,4 +1,4 @@
-import CRUDService from '../services/CRUDService';
+import CRUDService, { findStudentById } from '../services/CRUDService';
 
 let displayStudent = async (req, res) => {
     try {
@@ -42,7 +42,13 @@ let deleteStudent = async (req, res) => {
 
 let createStudent = async (req, res) => {
     try {
-        let data = await CRUDService.createStudent(req.body);
+
+        const studentId = req.body.student.studentId;  
+        if(findStudentById(studentId)) {    
+            return res.status(400).send('Student ID already exists');
+        }
+        let data = await CRUDService.createStudent(req.body.student);
+
         return res.redirect('/get-student');
 
     } catch (e) {
