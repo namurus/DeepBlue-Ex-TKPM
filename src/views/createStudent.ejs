@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Thêm sinh viên</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
 </head>
 
 <body class="bg-gray-100">
@@ -127,7 +129,7 @@
                     <div>
                         <label class="block text-gray-700 text-sm font-bold mb-2" for="phoneNumber">Số điện
                             thoại</label>
-                        <input type="text" name="phoneNumber" required
+                        <input id="phoneNumber" type="text" name="phoneNumber" required
                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             placeholder="Số điện thoại" />
                     </div>
@@ -172,9 +174,13 @@
     </div>
 </body>
 
-</html>
-
 <script>
+
+    const phoneInputField = document.querySelector("#phoneNumber");
+        const phoneInput = window.intlTelInput(phoneInputField, {
+            utilsScript:
+                "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+        });
     const urlParams = new URLSearchParams(window.location.search);
 
     if (urlParams.has('success')) {
@@ -195,3 +201,5 @@
         alert(errorMessage);
     }
 </script>
+
+</html>
