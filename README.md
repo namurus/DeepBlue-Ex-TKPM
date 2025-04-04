@@ -107,3 +107,29 @@ https://deepblue-ex-tkpm.onrender.com/get-student
 ![Email Domain](images/checkInvalidDomain.png)
 - Tình trạng sinh viên chỉ có thể thay đổi theo một số quy tắc (Chưa hoàn thiện UI/UX).
 ![Student Status Update](images/validateStudentStatusUpdate.png)
+
+## Hướng dẫn sử dụng **Version 3.0**
+- Mở terminal và chạy lệnh `npm install` để cài đặt tất cả các package từ package.json:
+```
+npm install
+```
+- Sau khi tải xong, dùng lệnh `npm start` để chạy chương trình:
+```
+npm start
+```
+- Chương trình web sẽ được host local tại port theo cài đặt trong file .env, ví dụ:
+```
+http://localhost:5134/get-create-student
+```
+- Có thể truy cập trang web đã được host tại link:
+```
+https://deepblue-ex-tkpm.onrender.com/get-student
+```
+
+### Minh chứng các tính năng:
+- Số điện thoại phải có định dạng hợp lệ theo quốc gia 
+![Phone Number Format](images/phoneNumberFormat.png)
+- Chuẩn bị cho yêu cầu quản lý khóa học và bảng điểm sinh viên   
+![Course, Class, Grade model](images/course_class_grade_model.png)
+- Cơ bản về Unit testing 
+![Unit testing basic](images/)
