@@ -1,9 +1,11 @@
-import { body, validationResult } from 'express-validator';
-import fs from 'fs';
+import { body, validationResult } from "express-validator";
+import fs from "fs";
 
-const config = JSON.parse(fs.readFileSync('./src/config/allowEmailDomain.json', 'utf8'));
+// This middleware validates the email domain of the user during registration
+const config = JSON.parse(fs.readFileSync("./src/config/allowEmailDomain.json", "utf8"));
 const allowedDomain = config.allowedDomain;
 
+// Middleware to validate email domain
 const validateEmailDomain = (value) => {
     if (!value.endsWith(allowedDomain)) {
         throw new Error(`Email phải có đuôi ${allowedDomain}`);
@@ -11,16 +13,17 @@ const validateEmailDomain = (value) => {
     return true;
 };
 
+// Middleware to validate registration form
 const validateRegistration = [
-    body('email').isEmail().custom(validateEmailDomain),
+    body("email").isEmail().withMessage("Email không hợp lệ").custom(validateEmailDomain),
     (req, res, next) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            // Truyền lỗi sang EJS
-            return res.redirect('/create-student?error=email_domain');
+            const errorMessages = errors.array().map(err => err.msg);
+            return res.render("createStudent.ejs", { error: errorMessages.join(", "), success: false });
         }
         next();
     },
 ];
 
-module.exports = validateRegistration;
+export default validateRegistration;

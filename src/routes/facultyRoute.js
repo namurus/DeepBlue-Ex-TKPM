@@ -3,7 +3,6 @@ const router = express.Router();
 
 import facultyController from "../controllers/facultyController";
 
-// router.get("/", facultyController.displayFaculty);
 router.get("/", facultyController.displayAddFaculty);
 router.post("/", facultyController.createFaculty);
 router.post("/update/:id", facultyController.updateFaculty);
