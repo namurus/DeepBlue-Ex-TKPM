@@ -1,9 +1,5 @@
 const Grade = require('../models/grade.model');
 
-import connectDB from "./config/connectDB";
-
-connectDB();
-
 async function seedGrade() {
     try {
         // Xoá dữ liệu cũ (nếu cần)

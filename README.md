@@ -108,7 +108,7 @@ https://deepblue-ex-tkpm.onrender.com/get-student
 - Tình trạng sinh viên chỉ có thể thay đổi theo một số quy tắc (Chưa hoàn thiện UI/UX).
 ![Student Status Update](images/validateStudentStatusUpdate.png)
 
-## Hướng dẫn sử dụng **Version 3.0**
+## Hướng dẫn sử dụng **Version 4.0**
 - Mở terminal và chạy lệnh `npm install` để cài đặt tất cả các package từ package.json:
 ```
 npm install
@@ -133,3 +133,5 @@ https://deepblue-ex-tkpm.onrender.com/get-student
 ![Course, Class, Grade model](images/course_class_grade_model.png)
 - Cơ bản về Unit testing 
 ![Unit testing basic](images/)
+
+## Hướng dẫn sử dụng **Version 4.0**
