@@ -1,28 +1,46 @@
 # DeepBlue-Ex-TKPM
-## Hướng dẫn sử dụng **Version 1.0**
+## Hướng dẫn sử dụng **Version 5.0**
 ### Cấu trúc source code
 ```
 Mô hình sử dụng: Mô hình MVC
 
 DeepBlue-Ex-TKPM/
-├── src/
-│   ├── config/         Các tệp cấu hình
-│   ├── controllers/    Viết logic backend cho ứng (API)
-│   ├── models/         Chứa model cho Student
-│   ├── routes/         Cài đặt các route cho chương trình (Định tuyến API)
-│   ├── seeders/        Dữ liệu mẫu khởi tạo cho cơ sở dữ liệu
-│   ├── services/       Các dịch vụ để xử lý trên Database MongoDB
-│   ├── views/          Chứa giao diện của ứng dụng
-│   └── server.js       File chính khởi động server
-├── .babelrc
-├── .env                Chứa biến môi trường
-├── .env.example        File .env mẫu
-├── package-lock.json
-├── package.json
-└── README.md           Tài liệu hướng dẫn của project
+├── backend/             - Thư mục chứa mã nguồn backend
+│   ├── src/             - Chứa các tệp mã nguồn cho backend
+│   │   ├── config/      - Các tệp cấu hình cho ứng dụng backend
+│   │   ├── controllers/ - Chứa các controller, nơi viết logic cho backend API
+│   │   ├── models/      - Chứa các model, định nghĩa cấu trúc dữ liệu
+│   │   ├── routes/      - Cài đặt các route cho chương trình
+│   │   ├── seeders/     - Dữ liệu mẫu dùng để khởi tạo cơ sở dữ liệu
+│   │   ├── services/    - Chứa các dịch vụ xử lý công việc với cơ sở dữ liệu MongoDB
+│   │   ├── views/       - Các tệp giao diện ứng dụng
+│   │   └── server.js    - File chính để khởi động server backend
+│   ├── .env             - Chứa các biến môi trường, thông tin bảo mật
+│   ├── .env.example     - File mẫu .env giúp cấu hình dễ dàng hơn
+│   ├── package-lock.json - Tệp khóa các phiên bản của các gói phụ thuộc
+│   ├── package.json     - Tệp cấu hình npm cho backend
+│   └── README.md        - Tài liệu hướng dẫn sử dụng cho phần backend
+├── frontend/            - Thư mục chứa mã nguồn frontend
+│   ├── public/          - Thư mục chứa các tệp tĩnh như favicon, index.html
+│   ├── src/             - Chứa mã nguồn ứng dụng React
+│   │   ├── assets/      - Các tài nguyên
+│   │   ├── pages/       - Các trang của ứng dụng
+│   │   ├── services/    - Các dịch vụ liên kết frontend với backend API
+│   │   ├── tests/       - Các tệp kiểm thử
+│   │   ├── App.jsx      - Component chính của ứng dụng React
+│   │   └── main.jsx     - Entry point của ứng dụng React
+│   ├── index.html       - Tệp HTML chính cho ứng dụng React
+│   ├── setupTests.js    - Cấu hình môi trường kiểm thử
+│   ├── vite.config.js   - Cấu hình của Vite
+│   ├── package-lock.json - Tệp khóa các phiên bản của các gói phụ thuộc cho frontend
+│   ├── package.json     - Tệp cấu hình npm cho frontend
+│   └── README.md        - Tài liệu hướng dẫn sử dụng cho phần frontend
+├── .gitignore           - Các tệp và thư mục cần loại bỏ khỏi Git
+└── README.md            - Tài liệu hướng dẫn chung cho toàn bộ dự án
 ```
 
 ### Hướng dẫn cài đặt & chạy chương trình
+#### Cài đặt và chạy Backend (BE)
 - Mở terminal và chạy lệnh `npm install` để cài đặt tất cả các package từ package.json:
 ```
 npm install
@@ -31,107 +49,35 @@ npm install
 ```
 npm start
 ```
-- Chương trình web sẽ được host local tại port theo cài đặt trong file .env, ví dụ:
+- Backend sẽ được host local tại port theo cài đặt trong file .env, ví dụ:
 ```
-http://localhost:5134/get-create-student
+http://localhost:5134
+```
+#### Cài đặt và chạy Frontend (FE)
+- Mở một terminal mới và di chuyển vào thư mục frontend, sau đó cài đặt các package cho frontend:
+```
+cd frontend
+npm install
+```
+- Sau khi cài xong, dùng lệnh sau để chạy chương trình frontend:
+```
+npm run dev
+```
+- Frontend sẽ được host tại http://localhost:5173. Truy cập trang tại:
+```
+http://localhost:5173
 ```
 
 ### Biên dịch (tùy theo ngôn ngữ sử dụng)
-- Sử dụng lệnh `npm install` và `npm start`, ngoài ra không cần biên dịch gì thêm.
+- Sử dụng lệnh `npm install` và `npm start` cho backend, lệnh `npm install` và `npm run dev` cho frontend, ngoài ra không cần biên dịch gì thêm.
 
 ### Chạy chương trình
-- Chạy chương trình bằng lệnh `npm start` trong terminal
-- Truy cập trang web tại http://localhost:[PORT]/get-student
-- Có thể truy cập trang web đã được host tại link https://deepblue-ex-tkpm.onrender.com/get-student
+- Chạy chương trình bằng các lệnh trong hướng dẫn sử dụng trong terminal.
+- Truy cập trang web tại: http://localhost:5173
 
-### Tạo Tag Phiên Bản `v1.0` 
-
-## Hướng dẫn sử dụng **Version 2.0**
-
-### Hướng dẫn cài đặt & chạy chương trình
-- Mở terminal và chạy lệnh `npm install` để cài đặt tất cả các package từ package.json:
-```
-npm install
-```
-- Sau khi tải xong, dùng lệnh `npm start` để chạy chương trình:
-```
-npm start
-```
-- Chương trình web sẽ được host local tại port theo cài đặt trong file .env, ví dụ:
-```
-http://localhost:5134/get-create-student
-```
-- Có thể truy cập trang web đã được host tại link:
-```
-https://deepblue-ex-tkpm.onrender.com/get-student
-```
-
-### Minh chứng các tính năng:
-- Mỗi commit phải gắn với một task/subtask cụ thể  
-![Commit](images/commit.png)
-- Cho phép đổi tên & thêm mới: khoa, tình trạng sinh viên, chương trình  
-![Add Faculty](images/add_faculty.png)
-- Thêm chức năng tìm kiếm:  tìm theo khoa, khoa + tên  
-![Search](images/search.png)
-- Hỗ trợ import/export dữ liệu: CSV, JSON, XML, Excel (chọn ít nhất 2)  
-![Export](images/export.png)
-- Thêm logging mechanism để troubleshooting production issue & audit purposes  
-![Logging](images/logging.png)
-
-### Tạo Tag Phiên Bản `v2.0`
-![Tag 2.0](images/tag_2_0.png)
-
-
-## Hướng dẫn sử dụng **Version 3.0**
-- Mở terminal và chạy lệnh `npm install` để cài đặt tất cả các package từ package.json:
-```
-npm install
-```
-- Sau khi tải xong, dùng lệnh `npm start` để chạy chương trình:
-```
-npm start
-```
-- Chương trình web sẽ được host local tại port theo cài đặt trong file .env, ví dụ:
-```
-http://localhost:5134/get-create-student
-```
-- Có thể truy cập trang web đã được host tại link:
-```
-https://deepblue-ex-tkpm.onrender.com/get-student
-```
-
-### Minh chứng các tính năng:
-- MSSV phải là duy nhất  
-![Check Student Id](images/checkExistStudentID.png)
-- Email phải thuộc một tên miền nhất định  
-![Email Domain](images/checkInvalidDomain.png)
-- Tình trạng sinh viên chỉ có thể thay đổi theo một số quy tắc (Chưa hoàn thiện UI/UX).
-![Student Status Update](images/validateStudentStatusUpdate.png)
-
-## Hướng dẫn sử dụng **Version 4.0**
-- Mở terminal và chạy lệnh `npm install` để cài đặt tất cả các package từ package.json:
-```
-npm install
-```
-- Sau khi tải xong, dùng lệnh `npm start` để chạy chương trình:
-```
-npm start
-```
-- Chương trình web sẽ được host local tại port theo cài đặt trong file .env, ví dụ:
-```
-http://localhost:5134/get-create-student
-```
-- Có thể truy cập trang web đã được host tại link:
-```
-https://deepblue-ex-tkpm.onrender.com/get-student
-```
-
-### Minh chứng các tính năng:
-- Số điện thoại phải có định dạng hợp lệ theo quốc gia 
-![Phone Number Format](images/phoneNumberFormat.png)
-- Chuẩn bị cho yêu cầu quản lý khóa học và bảng điểm sinh viên   
-![Course, Class, Grade model](images/course_class_grade_model.png)
-- Cơ bản về Unit testing 
-![Unit testing basic](images/)
-
-## Hướng dẫn sử dụng **Version 4.0**
+### Các tính năng đã làm được
+- Tái cấu trúc dự án nhằm tách biệt rõ ràng giữa Giao diện người dùng (UI/Presentation), Logic nghiệp vụ (Business Logic) và Truy cập dữ liệu (Data Access / Database). Chia thành 2 folder: frontend sử dụng React, backend sử dụng Express, Nodejs, database sử dụng MongoDB.
+- Thêm xóa khóa học, cập nhật thông tin khóa học (chỉ backend).
+- Mở lớp học cho một khóa học cụ thể.
+- Đăng ký khóa học cho sinh viên.
+- Unit test cho backend, unit test cho frontend trong thư mục test.
