@@ -1,4 +1,4 @@
-const Class = require('../models/Class'); // Assuming the Class model is in ../models/Class
+const Class = require('../models/class.model'); // Assuming the Class model is in ../models/Class
 
 async function getAllClasses() {
     try {
