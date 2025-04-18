@@ -1,4 +1,6 @@
 const Class = require('../models/class.model'); // Assuming the Class model is in ../models/Class
+const Student = require('../models/student.model'); // Assuming the Student model is in ../models/Student
+const Enrollment = require('../models/enrollment.model'); // Assuming the Enrollment model is in ../models/Enrollment
 
 async function getAllClasses() {
     try {
@@ -27,7 +29,52 @@ async function createClass(classData) {
     }
 }
 
+async function addStudentToClass(studentId, classCode) {
+    try {
+        // Check if the student exists
+        const student = await Student
+            .findOne({ studentId: studentId });
+        if (!student) {
+            throw new Error('Student not found.');
+        }
+
+        // Check if the class exists
+        const classData = await Class.findOne({
+            classCode
+                : classCode
+        });
+
+        if (!classData) {
+            throw new Error('Class not found.');
+        }
+
+        // Check if the student is already enrolled in the class
+        const existingEnrollment = await Enrollment.findOne({
+            studentId: studentId,
+            classCode: classCode
+        });
+        if (existingEnrollment) {
+            throw new Error('Student is already enrolled in this class.');
+        }
+
+        // Create a new enrollment
+        const enrollment = new Enrollment({
+            studentId: studentId,
+            classCode: classCode
+        });
+
+        await enrollment.save();
+        return enrollment;
+    }
+    catch (error) {
+        throw new Error(`Error adding student to class: ${error.message}`);
+    }
+}
+
+
+
 module.exports = {
-    getAllClasses,
-    createClass,
-};
+        getAllClasses,
+        createClass,
+        addStudentToClass,
+    };

@@ -49,7 +49,7 @@ const createStudent = async (student) => {
         const newStudent = await Student.create(student);
         return newStudent;
     } catch (error) {
-        console.error('Error creating student:', error);
+        console.error('Gặp lỗi khi thêm sinh viên:', error);
         throw error;
     }
 }
@@ -59,7 +59,7 @@ const deleteStudent = async (studentId) => {
         const student = await Student.findOneAndDelete({ studentId: studentId });
     }
     catch (error) {
-        console.error('Error deleting student:', error);
+        console.error('Gặp lỗi khi xóa sinh viên:', error);
         throw error;
     }
 }
