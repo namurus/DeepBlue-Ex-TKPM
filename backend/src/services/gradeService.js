@@ -1,26 +1,28 @@
-// const Grade = require('../models/grade.model');
-// const Enrollment = require('../models/enrollment.model'); 
+const Grade = require('../models/grade.model');
 
-// async function createGradesFromEnrollment() {
-//     try {
-//         // Fetch all enrollments
-//         const enrollments = await Enrollment.findAll();
+async function getGradesByStudentId(studentId) {
+    try {
+        const grades = await Grade.findAll({
+            where: { studentId },
+            attributes: ['courseId', 'grade'],
+            include: [{
+                model: require('../models/course.model'),
+                as: 'course',
+                attributes: ['name'],
+            }],
+        });
 
-//         // Iterate through enrollments and create grades
-//         for (const enrollment of enrollments) {
-//             const randomGrade = parseFloat((Math.random() * 9 + 1).toFixed(1)); // Random float between 1.0 and 10.0
-//             await Grade.create({
-//                 enrollmentId: enrollment.id,
-//                 grade: randomGrade,
-//             });
-//         }
+        return grades.map(grade => ({
+            courseId: grade.courseId,
+            grade: grade.grade,
+            courseName: grade.course ? grade.course.name : null,
+        }));
+    } catch (error) {
+        console.error('Error fetching grades:', error);
+        throw error;
+    }
+}
 
-//         console.log('Grades created successfully.');
-//     } catch (error) {
-//         console.error('Error creating grades:', error);
-//     }
-// }
+module.exports = {
+};
 
-// module.exports = {
-//     createGradesFromEnrollment,
-// };
