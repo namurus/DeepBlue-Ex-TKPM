@@ -39,11 +39,12 @@ function CreateStudentPage() {
       const result = await res.json();
       if (result.success) {
         alert("Thêm sinh viên thành công!");
-        setFormData({ ...formData, studentId: "" }); // hoặc reset toàn bộ
+        setFormData({ ...formData, studentId: "" });
       } else {
         alert(result.message || "Có lỗi xảy ra, vui lòng thử lại!");
       }
     } catch (error) {
+      console.error(error);
       alert("Lỗi kết nối đến máy chủ.");
     }
   };
@@ -133,7 +134,6 @@ function CreateStudentPage() {
   );
 }
 
-// Subcomponents
 function Input({ label, name, value, onChange, type = "text", required = false }) {
   return (
     <div>
