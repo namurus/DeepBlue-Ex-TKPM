@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import api from "../services/api.js";
+import api from "../services/api";
 
 function DisplayStudentPage() {
     const [dataTable, setDataTable] = useState([]);
@@ -13,7 +13,8 @@ function DisplayStudentPage() {
 
     const fetchStudents = async () => {
         try {
-            const res = await api.get("/get-student");
+            const res = await api.get("/students");
+            console.log(res.data);
             setDataTable(res.data || []);
         } catch (error) {
             console.error("Lỗi khi lấy dữ liệu sinh viên:", error);

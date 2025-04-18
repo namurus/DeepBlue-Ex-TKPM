@@ -13,7 +13,8 @@ import cors from "cors";
 dotenv.config();
 
 let app = express();
-app.use(cors({origin:true, credentials:true}));
+app.use(cors({ origin: true, credentials: true }));
+
 if (!fs.existsSync("logs")) {
     fs.mkdirSync("logs");
 }
