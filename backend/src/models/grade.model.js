@@ -7,12 +7,12 @@ const gradeSchema = new mongoose.Schema({
         unique: true,
     },
     studentId: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: String,
         ref: 'Student', // Reference to the Student model
         required: true,
     },
-    classId: {
-        type: mongoose.Schema.Types.ObjectId,
+    classCode: {
+        type: String,
         ref: 'Class', // Reference to the Class model
         required: true,
     },

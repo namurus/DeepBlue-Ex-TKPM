@@ -27,6 +27,10 @@ const ClassSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
+    registeredCount: {
+        type: Number,
+        default: 0
+    },
     schedule: {
         type: String,
         required: true,
