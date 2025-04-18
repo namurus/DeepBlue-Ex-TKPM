@@ -33,12 +33,34 @@ let addCourse = async (req, res) => {
     }
 }
 
+let deleteCourse = async (req, res) => {
+    try {
+        let course = await courseService.deleteCourse(req.params.id);
+        return res.status(200).json(course);
+    }
+    catch (e) {
+        console.log(e);
+        return res.status(500).json(e);
+    }
+}
+
+let updateCourse = async (req, res) => {
+    try {
+        let course = await courseService.updateCourse(req.params.id, req.body);
+        return res.status(200).json(course);
+    }
+    catch (e) {
+        console.log(e);
+        return res.status(500).json(e);
+    }
+}
+
 
 module.exports = { 
     getAllCourses: getAllCourses,
     getCourseById: getCourseById,
     addCourse: addCourse,
-    // deleteCourse: deleteCourse,
+    deleteCourse: deleteCourse,
     // deactivateCourse: deactivateCourse,
     // updateCourse: updateCourse
 };

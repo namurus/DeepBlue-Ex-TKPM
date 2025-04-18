@@ -8,11 +8,12 @@ import dotenv from "dotenv";
 import fs from "fs";
 import path from "path";
 import morgan from "morgan";
+import cors from "cors";
 
 dotenv.config();
 
 let app = express();
-
+app.use(cors());
 if (!fs.existsSync("logs")) {
     fs.mkdirSync("logs");
 }

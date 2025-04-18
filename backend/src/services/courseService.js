@@ -21,7 +21,7 @@ async function getCourseById(courseId) {
 async function addCourse(courseData) {
     const { courseCode, courseName, creditHours, department, description, prerequisite } = courseData;
     // Check if courseCode already exists
-    const existingCourse = await Course.findOne({ courseCode });
+    const existingCourse = await Course.findOne({ courseCode: courseCode });
     if (existingCourse) {
         throw new Error('Course code already exists.');
     }
@@ -91,7 +91,7 @@ async function deactivateCourse(courseId) {
 
 // Update course information
 async function updateCourse(courseId, updateData) {
-    const course = await Course.findById(courseId);
+    const course = await Course.findOne({ courseCode: courseCode });
 
     if (!course) {
         throw new Error('Course not found.');
