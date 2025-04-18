@@ -2,16 +2,18 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../services/api";
 
-function AddCoursePage() {
+function AddClassPage() {
   const navigate = useNavigate();
 
   const [form, setForm] = useState({
+    classCode: "",
     courseCode: "",
-    courseName: "",
-    creditHours: 0,
-    department: "",
-    description: "",
-    prerequisite: "",
+    academicYear: "",
+    semester: "",
+    lecturer: "",
+    maxStudents: 0,
+    schedule: "",
+    classroom: "",
   });
 
   const [error, setError] = useState("");
@@ -27,17 +29,16 @@ function AddCoursePage() {
 
     const payload = {
       ...form,
-      creditHours: Number(form.creditHours),
-      prerequisite: form.prerequisite || null,
+      maxStudents: Number(form.maxStudents),
     };
 
     try {
-      await api.post("/courses", payload);
-      setSuccess("Khóa học đã được thêm thành công!");
-      setTimeout(() => navigate("/courses"), 1500); // Redirect sau 1.5s
+      await api.post("/classes", payload);
+      setSuccess("Lớp học đã được thêm thành công!");
+      setTimeout(() => navigate("/classes"), 1500);
     } catch (err) {
-      console.error("Lỗi khi thêm khóa học:", err);
-      setError("Thêm khóa học thất bại. Vui lòng thử lại.");
+      console.error("Lỗi khi thêm lớp học:", err);
+      setError("Thêm lớp học thất bại. Vui lòng thử lại.");
     }
   };
 
@@ -45,7 +46,7 @@ function AddCoursePage() {
     <div className="bg-gray-100 py-8 px-4">
       <div className="max-w-screen-lg mx-auto bg-white p-6 rounded-lg shadow-md">
         <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
-          Thêm Khóa Học
+          Thêm Lớp Học
         </h2>
 
         {error && <div className="text-red-600 mb-4">{error}</div>}
@@ -54,54 +55,39 @@ function AddCoursePage() {
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Row 1 */}
           <div className="grid grid-cols-2 gap-6">
-            <Input label="Mã khóa học" name="courseCode" value={form.courseCode} onChange={handleChange} required />
-            <Input label="Tên môn học" name="courseName" value={form.courseName} onChange={handleChange} required />
+            <Input label="Mã lớp học" name="classCode" value={form.classCode} onChange={handleChange} required />
+            <Input label="Mã môn học" name="courseCode" value={form.courseCode} onChange={handleChange} required />
           </div>
 
           {/* Row 2 */}
           <div className="grid grid-cols-2 gap-6">
+            <Input label="Năm học" name="academicYear" value={form.academicYear} onChange={handleChange} required />
+            <Input label="Học kỳ" name="semester" value={form.semester} onChange={handleChange} required />
+          </div>
+
+          {/* Row 3 */}
+          <div className="grid grid-cols-2 gap-6">
+            <Input label="Giảng viên" name="lecturer" value={form.lecturer} onChange={handleChange} required />
             <Input
-              label="Số tín chỉ"
-              name="creditHours"
-              value={form.creditHours}
+              label="Số sinh viên tối đa"
+              name="maxStudents"
+              value={form.maxStudents}
               onChange={handleChange}
               type="number"
               required
             />
-            <Input label="Khoa" name="department" value={form.department} onChange={handleChange} required />
-          </div>
-
-          {/* Row 3 */}
-          <div>
-            <label className="block text-gray-700 text-sm font-bold mb-2 text-left">Mô tả</label>
-            <textarea
-              name="description"
-              value={form.description}
-              onChange={handleChange}
-              required
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline h-32"
-              placeholder="Nhập mô tả khóa học"
-            />
           </div>
 
           {/* Row 4 */}
-          <div>
-            <label className="block text-gray-700 text-sm font-bold mb-2 text-left">Tiên quyết (nếu có)</label>
-            <input
-              name="prerequisite"
-              value={form.prerequisite}
-              onChange={handleChange}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              placeholder="Nhập môn học tiên quyết (nếu có)"
-            />
-          </div>
+          <Input label="Lịch học" name="schedule" value={form.schedule} onChange={handleChange} required />
+          <Input label="Phòng học" name="classroom" value={form.classroom} onChange={handleChange} required />
 
           <div className="flex justify-center pt-4">
             <button
               type="submit"
               className="bg-blue-500 hover:bg-blue-700 font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline"
             >
-              Thêm Khóa Học
+              Thêm Lớp Học
             </button>
           </div>
         </form>
@@ -110,7 +96,6 @@ function AddCoursePage() {
   );
 }
 
-// Subcomponent for Input
 function Input({ label, name, value, onChange, type = "text", required = false }) {
   return (
     <div>
@@ -130,4 +115,4 @@ function Input({ label, name, value, onChange, type = "text", required = false }
   );
 }
 
-export default AddCoursePage;
+export default AddClassPage;
