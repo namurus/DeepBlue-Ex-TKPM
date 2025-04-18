@@ -56,7 +56,12 @@ async function addStudentToClass(studentId, classCode) {
         if (existingEnrollment) {
             throw new Error('Student is already enrolled in this class.');
         }
-
+        if(classData.registeredCount >= classData.maxStudents) {
+            throw new Error('Class is full.');
+        }
+        // Increment the registered count for the class
+        classData.registeredCount += 1;
+        await classData.save();
         // Create a new enrollment
         const enrollment = new Enrollment({
             studentId: studentId,
