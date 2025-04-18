@@ -1,20 +1,24 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import routes from './routes/routes';
-import DisplayStudentPage from './pages/DisplayStudentPage';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import './App.css';
+import DisplayStudentPage from './pages/DisplayStudentPage';
+import CreateStudentPage from './pages/CreateStudentPage';
+import UpdateStudentPage from './pages/UpdateStudentPage';
+import ErrorPage from './pages/ErrorPage';
 
 function App() {
   return (
-    <div className="App">
+    <BrowserRouter>
       <Routes>
-        {routes.map((route, index) => (
-          <Route key={index} path={route.path} element={route.element} />
-        ))}
-        <Route path="/" element={<DisplayStudentPage />} />
+        <Route path="/" element={<DisplayStudentPage />}>
+          <Route index element={<DisplayStudentPage />} />
+          <Route path="create-student" element={<CreateStudentPage />} />
+          <Route path="update-student" element={<UpdateStudentPage />} />
+          <Route path="*" element={<ErrorPage />} />
+        </Route>
       </Routes>
-    </div>
+    </BrowserRouter>
   );
 }
 
