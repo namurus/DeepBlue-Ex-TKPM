@@ -40,7 +40,7 @@ DeepBlue-Ex-TKPM/
 ```
 
 ### Hướng dẫn cài đặt & chạy chương trình
-#### Cài đặt và chạy Backend (BE)
+#### 1. Cài đặt và chạy Backend (BE)
 - Mở terminal và chạy lệnh `npm install` để cài đặt tất cả các package từ package.json:
 ```
 npm install
@@ -53,7 +53,10 @@ npm start
 ```
 http://localhost:5134
 ```
-#### Cài đặt và chạy Frontend (FE)
+#### 2. Chạy test cho Backend
+
+
+#### 3. Cài đặt và chạy Frontend (FE)
 - Mở một terminal mới và di chuyển vào thư mục frontend, sau đó cài đặt các package cho frontend:
 ```
 cd frontend
@@ -66,6 +69,16 @@ npm run dev
 - Frontend sẽ được host tại http://localhost:5173. Truy cập trang tại:
 ```
 http://localhost:5173
+```
+#### 4. Chạy test cho Frontend
+- Mở một terminal mới và di chuyển vào thư mục frontend, sau đó cài đặt các package cho frontend:
+```
+cd frontend
+npm install
+```
+- Chạy lệnh `npx vitest run` để chạy các unit test cho frontend:
+```
+npx vitest run
 ```
 
 ### Biên dịch (tùy theo ngôn ngữ sử dụng)
