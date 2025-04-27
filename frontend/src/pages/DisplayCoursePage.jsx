@@ -19,15 +19,9 @@ function DisplayCoursePage() {
     };
 
     return (
-        <div className="container mx-auto p-4 py-6">
+        <div>
             <div className="mb-4 flex justify-between items-center px-4">
-                <h1 className="text-2xl font-bold">Danh sách Khóa Học</h1>
-                <Link
-                    to="/add-course"
-                    className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-700"
-                >
-                    Thêm Khóa Học
-                </Link>
+                <h1 className="text-2xl font-bold">Danh sách khóa học</h1>
             </div>
 
             <table className="min-w-full bg-white border border-gray-300 shadow-md rounded-lg">

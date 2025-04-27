@@ -1,21 +1,21 @@
 import { useState, useEffect } from "react";
 import api from "../services/api";
-import { Link } from "react-router-dom";
+import { Table, TableBody, TableCell, TableHead, TableHeadCell, TableRow, Modal, ModalBody, ModalFooter, ModalHeader, Button, FloatingLabel } from "flowbite-react";
 
 function DisplayStudentPage() {
     const [dataTable, setDataTable] = useState([]);
-    const [searchQuery, setSearchQuery] = useState(""); // Chứa từ khóa tìm kiếm
+    const [searchQuery, setSearchQuery] = useState("");
     const [searchType, setSearchType] = useState("studentId"); // Kiểu tìm kiếm (MSSV, tên, khoa)
     const [detailStudent, setDetailStudent] = useState(null);
     const [showDetail, setShowDetail] = useState(false);
 
     useEffect(() => {
-        fetchStudents(); // Lấy danh sách sinh viên lúc đầu
+        fetchStudents();
     }, []);
 
     const fetchStudents = async () => {
         try {
-            const res = await api.get("/students"); // Lấy tất cả sinh viên từ API
+            const res = await api.get("/students");
             setDataTable(res.data || []);
         } catch (error) {
             console.error("Lỗi khi lấy dữ liệu sinh viên:", error);
@@ -23,12 +23,11 @@ function DisplayStudentPage() {
     };
 
     const handleSearch = async (e) => {
-        e.preventDefault(); // Ngăn việc reload trang
+        e.preventDefault();
         try {
-            // Tạo URL query dựa trên kiểu tìm kiếm và từ khóa nhập vào
             const params = new URLSearchParams();
             if (searchQuery) {
-                params.append(searchType, searchQuery); // Tùy theo searchType sẽ gửi studentId, name, hoặc faculty
+                params.append(searchType, searchQuery);
             }
 
             const res = await api.get(`/students?${params.toString()}`);
@@ -51,14 +50,7 @@ function DisplayStudentPage() {
 
     return (
         <div className="container mx-auto p-4 py-6">
-            <div className="mb-4 flex justify-between items-center px-4">
-                <Link
-                    to="/create-student"
-                    className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-700 w-1/3 text-center"
-                >
-                    Thêm Sinh Viên
-                </Link>
-
+            <div className="mb-4 flex justify-end items-center">
                 {/* Form tìm kiếm */}
                 <form
                     onSubmit={handleSearch}
@@ -81,7 +73,7 @@ function DisplayStudentPage() {
                         placeholder="Nhập từ khóa tìm kiếm"
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
-                        className="border p-2 rounded w-full md:w-1/3"
+                        className="border p-2 rounded w-full"
                     />
 
                     <button
@@ -95,107 +87,99 @@ function DisplayStudentPage() {
 
             <h1 className="text-2xl font-bold mb-4">Danh sách sinh viên</h1>
 
-            <table className="min-w-full bg-white border border-gray-300 shadow-md rounded-lg">
-                <thead>
-                    <tr className="bg-gray-200">
-                        {[
-                            "Mã SV",
-                            "Họ tên",
-                            "Ngày sinh",
-                            "Giới tính",
-                            "Khoa",
-                            "Khóa",
-                            "Chương trình",
-                            "Địa chỉ",
-                            "Email",
-                            "Số điện thoại",
-                            "Tình trạng",
-                            "Hành động",
-                        ].map((col) => (
-                            <th key={col} className="py-2 px-4 border-b">
-                                {col}
-                            </th>
+            <div className="overflow-x-auto">
+                <Table striped>
+                    <TableHead>
+                        <TableHeadCell>Mã SV</TableHeadCell>
+                        <TableHeadCell>Họ tên</TableHeadCell>
+                        {/* <TableHeadCell>Ngày sinh</TableHeadCell>
+                        <TableHeadCell>Giới tính</TableHeadCell> */}
+                        <TableHeadCell>Khoa</TableHeadCell>
+                        <TableHeadCell>Khóa</TableHeadCell>
+                        {/* <TableHeadCell>Chương trình</TableHeadCell>
+                        <TableHeadCell>Địa chỉ</TableHeadCell> */}
+                        <TableHeadCell>Email</TableHeadCell>
+                        <TableHeadCell>Tình trạng</TableHeadCell>
+                        <TableHeadCell>Hành động</TableHeadCell>
+                    </TableHead>
+                    <TableBody>
+                        {dataTable.map((student) => (
+                            <TableRow key={student.studentId}>
+                                <TableCell>{student.studentId}</TableCell>
+                                <TableCell>{student.fullName}</TableCell>
+                                {/* <TableCell>
+                                    {new Date(student.dateOfBirth).toLocaleDateString()}
+                                </TableCell>
+                                <TableCell>{student.gender}</TableCell> */}
+                                <TableCell>{student.faculty}</TableCell>
+                                <TableCell>{student.course}</TableCell>
+                                {/* <TableCell>{student.program}</TableCell>
+                                <TableCell>{student.address}</TableCell> */}
+                                {/* <TableCell title={student.email}>
+                                    {student.email.length > 20
+                                        ? student.email.substring(0, 15) + "..."
+                                        : student.email}
+                                </TableCell> */}
+                                <TableCell>{student.email}</TableCell>
+                                <TableCell>{student.studentStatus}</TableCell>
+                                <TableCell>
+                                    <button
+                                        onClick={() => showStudentDetails(student)}
+                                        className="bg-blue-500 text-white py-1 px-3 rounded hover:bg-blue-700"
+                                    >
+                                        Chi tiết
+                                    </button>
+                                </TableCell>
+                            </TableRow>
                         ))}
-                    </tr>
-                </thead>
-                <tbody>
-                    {dataTable.map((student) => (
-                        <tr key={student.studentId} className="hover:bg-gray-100">
-                            <td className="py-2 px-4 border-b">{student.studentId}</td>
-                            <td className="py-2 px-4 border-b">{student.fullName}</td>
-                            <td className="py-2 px-4 border-b">
-                                {new Date(student.dateOfBirth).toLocaleDateString()}
-                            </td>
-                            <td className="py-2 px-4 border-b">{student.gender}</td>
-                            <td className="py-2 px-4 border-b">{student.faculty}</td>
-                            <td className="py-2 px-4 border-b">{student.course}</td>
-                            <td className="py-2 px-4 border-b">{student.program}</td>
-                            <td className="py-2 px-4 border-b">{student.address}</td>
-                            <td className="py-2 px-4 border-b">{student.email}</td>
-                            <td className="py-2 px-4 border-b">{student.phoneNumber}</td>
-                            <td className="py-2 px-4 border-b">{student.studentStatus}</td>
-                            <td className="py-2 px-4 border-b">
-                                <button
-                                    onClick={() => showStudentDetails(student)}
-                                    className="bg-blue-500 text-white py-1 px-3 rounded hover:bg-blue-700"
-                                >
-                                    Chi tiết
-                                </button>
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+                    </TableBody>
+                </Table>
+            </div>
 
-            {/* Chi tiết sinh viên */}
+            {/* Modal chi tiết sinh viên */}
             {showDetail && detailStudent && (
-                <div className="flex fixed inset-0 bg-gray-800 bg-opacity-50 justify-center items-center z-50">
-                    <div className="bg-white rounded-lg w-full max-w-2xl p-8 overflow-y-auto max-h-[90vh]">
-                        <h2 className="text-xl font-bold mb-4">Chi tiết sinh viên</h2>
-                        <p>
+                <Modal show={showDetail} onClose={closeDetailDialog}>
+                    <ModalHeader>Chi tiết sinh viên</ModalHeader>
+                    <ModalBody>
+                        <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
                             <strong>Mã SV:</strong> {detailStudent.studentId}
                         </p>
-                        <p>
+                        <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
                             <strong>Họ tên:</strong> {detailStudent.fullName}
                         </p>
-                        <p>
+                        <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
                             <strong>Ngày sinh:</strong>{" "}
                             {new Date(detailStudent.dateOfBirth).toLocaleDateString()}
                         </p>
-                        <p>
+                        <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
                             <strong>Giới tính:</strong> {detailStudent.gender}
                         </p>
-                        <p>
+                        <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
                             <strong>Khoa:</strong> {detailStudent.faculty}
                         </p>
-                        <p>
+                        <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
                             <strong>Khóa:</strong> {detailStudent.course}
                         </p>
-                        <p>
+                        <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
                             <strong>Chương trình:</strong> {detailStudent.program}
                         </p>
-                        <p>
+                        <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
                             <strong>Địa chỉ:</strong> {detailStudent.address}
                         </p>
-                        <p>
+                        <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
                             <strong>Email:</strong> {detailStudent.email}
                         </p>
-                        <p>
+                        <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
                             <strong>Số điện thoại:</strong> {detailStudent.phoneNumber}
                         </p>
-                        <p>
+                        <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
                             <strong>Tình trạng:</strong> {detailStudent.studentStatus}
                         </p>
-                        <div className="text-right mt-4">
-                            <button
-                                onClick={closeDetailDialog}
-                                className="bg-red-500 text-white py-1 px-4 rounded hover:bg-red-700"
-                            >
-                                Đóng
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                    </ModalBody>
+                    <ModalFooter>
+                        <Button onClick={closeDetailDialog}>Đóng</Button>
+                    </ModalFooter>
+                </Modal>
             )}
         </div>
     );

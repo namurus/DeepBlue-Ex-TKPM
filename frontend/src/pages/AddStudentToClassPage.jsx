@@ -32,11 +32,11 @@ function AddStudentToClassPage() {
   };
 
   return (
-    <div className="bg-gray-100 py-8 px-4">
+    <div className="container mx-auto p-4 py-6">
+      <div className="mb-4 flex justify-center items-center px-4">
+        <h1 className="text-2xl font-bold">Thêm Sinh Viên Vào Lớp</h1>
+      </div>
       <div className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md">
-        <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
-          Thêm Sinh Viên Vào Lớp
-        </h2>
 
         {error && <div className="text-red-600 mb-4">{error}</div>}
         {success && <div className="text-green-600 mb-4">{success}</div>}

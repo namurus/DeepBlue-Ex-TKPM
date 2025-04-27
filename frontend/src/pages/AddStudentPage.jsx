@@ -52,11 +52,11 @@ function CreateStudentPage() {
   const courseOptions = Array.from({ length: 8 }, (_, i) => 17 + i);
 
   return (
-    <div className="bg-gray-100 py-8 px-4">
+    <div className="container mx-auto p-4 py-6">
+    <div className="mb-4 flex justify-center items-center px-4">
+      <h1 className="text-2xl font-bold">Thêm sinh viên</h1>
+    </div>
       <div className="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md">
-        <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
-          Thông tin sinh viên
-        </h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Row 1 */}
           <div className="grid grid-cols-2 gap-4">

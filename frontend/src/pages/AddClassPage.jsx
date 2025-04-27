@@ -43,31 +43,60 @@ function AddClassPage() {
   };
 
   return (
-    <div className="bg-gray-100 py-8 px-4">
+    <div className="container mx-auto p-4 py-6">
+      <div className="mb-4 flex justify-center items-center px-4">
+        <h1 className="text-2xl font-bold">Thêm Lớp Học</h1>
+      </div>
       <div className="max-w-screen-lg mx-auto bg-white p-6 rounded-lg shadow-md">
-        <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
-          Thêm Lớp Học
-        </h2>
-
         {error && <div className="text-red-600 mb-4">{error}</div>}
         {success && <div className="text-green-600 mb-4">{success}</div>}
 
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Row 1 */}
           <div className="grid grid-cols-2 gap-6">
-            <Input label="Mã lớp học" name="classCode" value={form.classCode} onChange={handleChange} required />
-            <Input label="Mã môn học" name="courseCode" value={form.courseCode} onChange={handleChange} required />
+            <Input
+              label="Mã lớp học"
+              name="classCode"
+              value={form.classCode}
+              onChange={handleChange}
+              required
+            />
+            <Input
+              label="Mã môn học"
+              name="courseCode"
+              value={form.courseCode}
+              onChange={handleChange}
+              required
+            />
           </div>
 
           {/* Row 2 */}
           <div className="grid grid-cols-2 gap-6">
-            <Input label="Năm học" name="academicYear" value={form.academicYear} onChange={handleChange} required />
-            <Input label="Học kỳ" name="semester" value={form.semester} onChange={handleChange} required />
+            <Input
+              label="Năm học"
+              name="academicYear"
+              value={form.academicYear}
+              onChange={handleChange}
+              required
+            />
+            <Input
+              label="Học kỳ"
+              name="semester"
+              value={form.semester}
+              onChange={handleChange}
+              required
+            />
           </div>
 
           {/* Row 3 */}
           <div className="grid grid-cols-2 gap-6">
-            <Input label="Giảng viên" name="lecturer" value={form.lecturer} onChange={handleChange} required />
+            <Input
+              label="Giảng viên"
+              name="lecturer"
+              value={form.lecturer}
+              onChange={handleChange}
+              required
+            />
             <Input
               label="Số sinh viên tối đa"
               name="maxStudents"
@@ -79,8 +108,20 @@ function AddClassPage() {
           </div>
 
           {/* Row 4 */}
-          <Input label="Lịch học" name="schedule" value={form.schedule} onChange={handleChange} required />
-          <Input label="Phòng học" name="classroom" value={form.classroom} onChange={handleChange} required />
+          <Input
+            label="Lịch học"
+            name="schedule"
+            value={form.schedule}
+            onChange={handleChange}
+            required
+          />
+          <Input
+            label="Phòng học"
+            name="classroom"
+            value={form.classroom}
+            onChange={handleChange}
+            required
+          />
 
           <div className="flex justify-center pt-4">
             <button
@@ -96,10 +137,20 @@ function AddClassPage() {
   );
 }
 
-function Input({ label, name, value, onChange, type = "text", required = false }) {
+function Input({
+  label,
+  name,
+  value,
+  onChange,
+  type = "text",
+  required = false,
+}) {
   return (
     <div>
-      <label className="block text-gray-700 text-sm font-bold mb-2 text-left" htmlFor={name}>
+      <label
+        className="block text-gray-700 text-sm font-bold mb-2 text-left"
+        htmlFor={name}
+      >
         {label}
       </label>
       <input
