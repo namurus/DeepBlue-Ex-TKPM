@@ -7,7 +7,10 @@ export function MyNavbar() {
     // <Navbar fluid rounded className="bg-gradient-to-r from-teal-200 to-lime-200">
     <Navbar fluid rounded className="bg-gray-900 py-3">
       <NavbarBrand as={Link} to="https://github.com/sitrismart/DeepBlue-Ex-TKPM" target="_blank">
-        <img src="/deepblue.png" className="mr-3 h-6 sm:h-9" alt="DeepBlue Logo" />
+      <div class="bg-blue-500 rounded mr-3">
+      <img src="/deepblue.svg" className="h-6 sm:h-9" alt="DeepBlue Logo" />
+      </div>
+        
         <span className="self-center whitespace-nowrap text-xl font-bold text-white">DeepBlue</span>
       </NavbarBrand>
       <NavbarToggle />
