@@ -18,41 +18,41 @@ export function MySidebar() {
 
             {/* Home */}
             <SidebarItem as={Link} to="/" icon={HiHome}>
-              Home
+              Trang chủ
             </SidebarItem>
 
             {/* Student Section */}
             <SidebarCollapse
               icon={HiUserGroup}
-              label="Student"
+              label="Sinh viên"
               open={openCollapse === "student"}
               onClick={() => handleCollapse("student")}
             >
-              <SidebarItem as={Link} to="/students">View Students</SidebarItem>
-              <SidebarItem as={Link} to="/add-student">Add Student</SidebarItem>
+              <SidebarItem as={Link} to="/students">Danh sách sinh viên</SidebarItem>
+              <SidebarItem as={Link} to="/add-student">Thêm sinh viên</SidebarItem>
             </SidebarCollapse>
 
             {/* Course Section */}
             <SidebarCollapse
               icon={HiBookOpen}
-              label="Course"
+              label="Khóa học"
               open={openCollapse === "course"}
               onClick={() => handleCollapse("course")}
             >
-              <SidebarItem as={Link} to="/courses">View Courses</SidebarItem>
-              <SidebarItem as={Link} to="/add-course">Add Course</SidebarItem>
+              <SidebarItem as={Link} to="/courses">Danh sách khóa học</SidebarItem>
+              <SidebarItem as={Link} to="/add-course">Thêm khóa học</SidebarItem>
             </SidebarCollapse>
 
             {/* Class Section */}
             <SidebarCollapse
               icon={HiAcademicCap}
-              label="Class"
+              label="Lớp học"
               open={openCollapse === "class"}
               onClick={() => handleCollapse("class")}
             >
-              <SidebarItem as={Link} to="/classes">View Classes</SidebarItem>
-              <SidebarItem as={Link} to="/add-class">Add Class</SidebarItem>
-              <SidebarItem as={Link} to="/add-student-to-class">Add Student To Class</SidebarItem>
+              <SidebarItem as={Link} to="/classes">Danh sách lớp học</SidebarItem>
+              <SidebarItem as={Link} to="/add-class">Thêm lớp học</SidebarItem>
+              <SidebarItem as={Link} to="/add-student-to-class">Thêm sinh viên vào lớp</SidebarItem>
             </SidebarCollapse>
 
           </SidebarItemGroup>

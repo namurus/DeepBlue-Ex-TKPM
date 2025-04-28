@@ -15,11 +15,11 @@ export function MyNavbar() {
       </NavbarBrand>
       <NavbarToggle />
       <NavbarCollapse>
-        <NavbarLink as={Link} to="#" active className="font-bold text-white">Home</NavbarLink>
-        <NavbarLink as={Link} to="#" className="font-bold text-white">About</NavbarLink>
-        <NavbarLink as={Link} to="#" className="font-bold text-white">Student</NavbarLink>
-        <NavbarLink as={Link} to="#" className="font-bold text-white">Faculty</NavbarLink>
-        <NavbarLink as={Link} to="#" className="font-bold text-white">Class</NavbarLink>
+        <NavbarLink as={Link} to="/" active className="font-bold text-white">Trang chủ</NavbarLink>
+        <NavbarLink as={Link} to="/students" className="font-bold text-white">Sinh viên</NavbarLink>
+        <NavbarLink as={Link} to="/courses" className="font-bold text-white">Khóa học</NavbarLink>
+        <NavbarLink as={Link} to="/classes" className="font-bold text-white">Lớp học</NavbarLink>
+        <div className="flex items-center space-x-4 font-bold text-white">Đổi ngôn ngữ</div>
       </NavbarCollapse>
     </Navbar>
   );
