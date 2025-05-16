@@ -54,6 +54,15 @@ npm start
 http://localhost:5134
 ```
 #### 2. Chạy test cho Backend
+- Mở một terminal mới và di chuyển vào thư mục frontend, sau đó cài đặt các package cho backend:
+```
+cd backend
+npm install
+```
+- Chạy lệnh `npm test` để chạy các unit test cho backend:
+```
+npm test
+```
 
 
 #### 3. Cài đặt và chạy Frontend (FE)
@@ -89,8 +98,5 @@ npx vitest run
 - Truy cập trang web tại: http://localhost:5173
 
 ### Các tính năng đã làm được
-- Tái cấu trúc dự án nhằm tách biệt rõ ràng giữa Giao diện người dùng (UI/Presentation), Logic nghiệp vụ (Business Logic) và Truy cập dữ liệu (Data Access / Database). Chia thành 2 folder: frontend sử dụng React, backend sử dụng Express, Nodejs, database sử dụng MongoDB.
-- Thêm xóa khóa học, cập nhật thông tin khóa học (chỉ backend).
-- Mở lớp học cho một khóa học cụ thể.
-- Đăng ký khóa học cho sinh viên.
-- Unit test cho backend, unit test cho frontend trong thư mục test.
+- Xuất bảng điểm cho sinh viên (Gặp phải lỗi font Tiếng Việt).
+- Thêm sinh viên bằng file CSV.
