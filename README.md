@@ -54,7 +54,15 @@ npm start
 http://localhost:5134
 ```
 #### 2. Chạy test cho Backend
-
+- Mở một terminal mới và di chuyển vào thư mục frontend, sau đó cài đặt các package cho backend:
+```
+cd backend
+npm install
+```
+- Chạy lệnh `npm test` để chạy các unit test cho backend:
+```
+npm test
+```
 
 #### 3. Cài đặt và chạy Frontend (FE)
 - Mở một terminal mới và di chuyển vào thư mục frontend, sau đó cài đặt các package cho frontend:
@@ -90,3 +98,5 @@ npx vitest run
 
 ### Các tính năng đã làm được
 - Tích hợp thư viện i18next cho tính năng đa ngôn ngữ (Tiếng Anh và Tiếng Việt).
+- Xuất bảng điểm cho sinh viên (Gặp phải lỗi font Tiếng Việt).
+- Thêm sinh viên bằng file CSV.
