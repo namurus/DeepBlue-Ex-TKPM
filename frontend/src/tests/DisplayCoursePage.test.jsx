@@ -1,55 +1,75 @@
-import { render, screen, waitFor } from "@testing-library/react";
-import DisplayCoursePage from "../pages/DisplayCoursePage";
-import { BrowserRouter } from "react-router-dom";
+import { render, screen, waitFor, fireEvent } from "@testing-library/react";
+import DisplayStudentPage from "../pages/DisplayStudentPage";
 import api from "../services/api";
-import { vi, describe, it, expect, beforeEach } from "vitest";
+import { BrowserRouter } from "react-router-dom";
+import { vi, it, expect, describe, beforeEach } from "vitest";
 
-// ✅ Mock API
+// Mock react-i18next đơn giản
+vi.mock("react-i18next", () => ({
+  useTranslation: () => ({
+    t: (key) => key,
+  }),
+}));
+
+// Mock API
 vi.mock("../services/api");
 
-// ✅ Dữ liệu giả
-const mockCourses = [
+// Dữ liệu mẫu
+const mockStudents = [
   {
-    _id: "6801f9ce0a30336aca8004f6",
-    courseCode: "CS101",
-    courseName: "Introduction to Computer Science",
-    creditHours: 3,
-    department: "Computer Science",
-    description:
-      "This course introduces the basics of computer science, including algorithms, data structures, and programming concepts.",
-    prerequisite: null,
+    studentId: "SV001",
+    fullName: "Nguyễn Văn A",
+    dateOfBirth: "2002-05-20T00:00:00.000Z",
+    gender: "Male",
+    course: "22",
+    email: "nguyenvana@student.university.edu.vn",
+    phoneNumber: "0987654321",
+    faculty: "Công nghệ thông tin",
+    program: "Đại trà",
+    address: "123 Nguyễn Văn Cừ",
+    studentStatus: "Đang học",
   },
 ];
 
-describe("DisplayCoursePage", () => {
+describe("DisplayStudentPage", () => {
   beforeEach(() => {
-    api.get.mockResolvedValue({ data: mockCourses });
+    // Trả về danh sách sinh viên
+    api.get.mockResolvedValue({ data: mockStudents });
   });
 
-  it("hiển thị danh sách khóa học từ API", async () => {
+  it("render danh sách sinh viên", async () => {
     render(
       <BrowserRouter>
-        <DisplayCoursePage />
+        <DisplayStudentPage />
+      </BrowserRouter>
+    );
+
+    // Đợi dữ liệu hiển thị
+    await waitFor(() => {
+      expect(screen.getByText("Nguyễn Văn A")).toBeInTheDocument();
+      expect(screen.getByText("SV001")).toBeInTheDocument();
+      expect(screen.getByText("Công nghệ thông tin")).toBeInTheDocument();
+    });
+  });
+
+  it("mở modal khi bấm nút 'detail'", async () => {
+    render(
+      <BrowserRouter>
+        <DisplayStudentPage />
       </BrowserRouter>
     );
 
     await waitFor(() => {
-      expect(screen.getByText("CS101")).toBeInTheDocument();
-      expect(
-        screen.getByText("Introduction to Computer Science")
-      ).toBeInTheDocument();
-      expect(screen.getByText("3")).toBeInTheDocument();
-      expect(screen.getByText("Computer Science")).toBeInTheDocument();
-      expect(
-        screen.getByText(
-          /This course introduces the basics of computer science/i
-        )
-      ).toBeInTheDocument();
-      expect(screen.getByText("-")).toBeInTheDocument(); // prerequisite null
+      expect(screen.getByText("Nguyễn Văn A")).toBeInTheDocument();
     });
 
-    // Kiểm tra tiêu đề và nút
-    expect(screen.getByText("Danh sách Khóa Học")).toBeInTheDocument();
-    expect(screen.getByText("Thêm Khóa Học")).toBeInTheDocument();
+    const detailBtn = screen.getByText("detail");
+    fireEvent.click(detailBtn);
+
+    await waitFor(() => {
+      expect(screen.getByText("student_details")).toBeInTheDocument();
+      expect(screen.getByText("Nguyễn Văn A")).toBeInTheDocument();
+      expect(screen.getByText("Đại trà")).toBeInTheDocument();
+    });
   });
 });

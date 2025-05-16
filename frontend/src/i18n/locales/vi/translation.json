@@ -144,7 +144,12 @@
   "phone": "Số điện thoại",
   "close": "Đóng",
   "upload_success": "Tải lên thành công!",
-  "upload_error": "Có lỗi xảy ra khi tải lên."
+  "upload_error": "Có lỗi xảy ra khi tải lên.",
+  "export": {
+    "title": "Xuất bảng điểm",
+    "enter_student_id": "Nhập mã sinh viên",
+    "export_button": "Xuất"
+  }
 }
 
 
