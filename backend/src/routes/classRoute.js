@@ -1,7 +1,6 @@
 import express from "express";
-const router = express.Router();
-
 import classController from "../controllers/classController";
+const router = express.Router();
 
 router.get("/", classController.getAllClasses);
 router.post("/", classController.createClass);
