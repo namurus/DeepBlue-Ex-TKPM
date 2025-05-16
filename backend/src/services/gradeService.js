@@ -1,22 +1,26 @@
 const Grade = require('../models/grade.model');
 
+async function addGrade(gradeData) {
+    try {
+        const newGrade = await Grade.create({
+            studentId: gradeData.studentId,
+            courseCode: gradeData.courseCode,
+            courseName: gradeData.courseName,
+            grade: gradeData.grade,
+            status: gradeData.status
+        });
+        return newGrade;
+    } catch (error) {
+        console.error('Error adding grade:', error);
+        throw error;
+    }
+}
+
 async function getGradesByStudentId(studentId) {
     try {
-        const grades = await Grade.findAll({
-            where: { studentId },
-            attributes: ['courseId', 'grade'],
-            include: [{
-                model: require('../models/course.model'),
-                as: 'course',
-                attributes: ['name'],
-            }],
-        });
+        const grades = await Grade.find({ studentId: studentId });
+        return grades;
 
-        return grades.map(grade => ({
-            courseId: grade.courseId,
-            grade: grade.grade,
-            courseName: grade.course ? grade.course.name : null,
-        }));
     } catch (error) {
         console.error('Error fetching grades:', error);
         throw error;
@@ -24,5 +28,7 @@ async function getGradesByStudentId(studentId) {
 }
 
 module.exports = {
+    addGrade,
+    getGradesByStudentId,
 };
 

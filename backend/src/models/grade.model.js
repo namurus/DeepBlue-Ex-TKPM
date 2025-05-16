@@ -1,19 +1,17 @@
 const mongoose = require('mongoose');
 
 const gradeSchema = new mongoose.Schema({
-    gradeId: {
-        type: Number,
-        required: true,
-        unique: true,
-    },
     studentId: {
         type: String,
         ref: 'Student', // Reference to the Student model
         required: true,
     },
-    classCode: {
+    courseCode: {
         type: String,
-        ref: 'Class', // Reference to the Class model
+        required: true,
+    },
+    courseName: {
+        type: String,
         required: true,
     },
     grade: {

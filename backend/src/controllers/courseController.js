@@ -1,7 +1,8 @@
 import courseService from '../services/courseService.js';
-
+import Grade from '../models/grade.model.js';
 let getAllCourses = async (req, res) => {
     try {
+        await Grade.create
         let courses = await courseService.getAllCourses();
         return res.status(200).json(courses);
     }
