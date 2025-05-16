@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 
-
 const studentSchema = new mongoose.Schema({
     studentId: {
         type: String,
@@ -43,13 +42,7 @@ const studentSchema = new mongoose.Schema({
     phoneNumber: {
         type: String,
         required: true
-    },
-
-    // identityType: {
-    //     type: String,
-    //     enum: ["CMND", "CCCD", "Hộ chiếu"],
-    //     required: true
-    // },
+    }, 
     identityNumber: { type: String, required: true, unique: true },
     identityIssuedDate: { type: Date, required: true },
     identityExpiryDate: { type: Date },
