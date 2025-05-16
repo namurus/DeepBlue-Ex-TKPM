@@ -144,5 +144,10 @@
   "phone": "Phone Number",
   "close": "Close",
   "upload_success": "File uploaded successfully!",
-  "upload_failed": "File upload failed. Please try again."
+  "upload_failed": "File upload failed. Please try again.",
+  "export": {
+    "title": "Export Grade",
+    "enter_student_id": "Enter Student ID",
+    "export_button": "Export"
+  }
 }

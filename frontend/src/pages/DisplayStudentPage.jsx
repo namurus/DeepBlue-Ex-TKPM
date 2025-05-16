@@ -85,6 +85,37 @@ function DisplayStudentPage() {
     }
   };
 
+  const [exportStudentId, setExportStudentId] = useState("");
+
+  const handleExport = async (e) => {
+    e.preventDefault();
+    if (!exportStudentId) {
+      alert(t("please_enter_student_id"));
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        `http://localhost:5134/grades/export?id=${exportStudentId}`
+      );
+
+      if (!response.ok) throw new Error("Export failed");
+
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `grades_${exportStudentId}.pdf`;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error("Lỗi export bảng điểm:", error);
+      alert(t("export_failed"));
+    }
+  };
+
   return (
     <div className="container mx-auto p-4 py-6">
       <div className="mb-4 flex justify-end items-center">
@@ -229,6 +260,27 @@ function DisplayStudentPage() {
           </ModalFooter>
         </Modal>
       )}
+
+      <h1 className="text-2xl font-bold mb-4">{t("export.title")}</h1>
+
+      <form
+        onSubmit={handleExport}
+        className="flex items-center gap-2 w-full md:w-auto"
+      >
+        <input
+          type="text"
+          placeholder={t("export.enter_student_id")}
+          value={exportStudentId}
+          onChange={(e) => setExportStudentId(e.target.value)}
+          className="border p-2 rounded min-w-[100px]"
+        />
+        <button
+          type="submit"
+          className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-700"
+        >
+          {t("export.export_button")}
+        </button>
+      </form>
     </div>
   );
 }

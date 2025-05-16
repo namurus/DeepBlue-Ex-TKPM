@@ -1,5 +1,5 @@
 # DeepBlue-Ex-TKPM
-## Hướng dẫn sử dụng **Version 5.0**
+## Hướng dẫn sử dụng **Version 6.0**
 ### Cấu trúc source code
 ```
 Mô hình sử dụng: Mô hình MVC
@@ -64,7 +64,6 @@ npm install
 npm test
 ```
 
-
 #### 3. Cài đặt và chạy Frontend (FE)
 - Mở một terminal mới và di chuyển vào thư mục frontend, sau đó cài đặt các package cho frontend:
 ```
@@ -98,5 +97,6 @@ npx vitest run
 - Truy cập trang web tại: http://localhost:5173
 
 ### Các tính năng đã làm được
+- Tích hợp thư viện i18next cho tính năng đa ngôn ngữ (Tiếng Anh và Tiếng Việt).
 - Xuất bảng điểm cho sinh viên (Gặp phải lỗi font Tiếng Việt).
 - Thêm sinh viên bằng file CSV.
