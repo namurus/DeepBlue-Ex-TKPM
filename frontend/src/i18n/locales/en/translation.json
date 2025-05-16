@@ -142,5 +142,7 @@
   "program": "Program",
   "address": "Address",
   "phone": "Phone Number",
-  "close": "Close"
+  "close": "Close",
+  "upload_success": "File uploaded successfully!",
+  "upload_failed": "File upload failed. Please try again."
 }

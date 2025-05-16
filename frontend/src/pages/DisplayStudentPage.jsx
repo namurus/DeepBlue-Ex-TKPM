@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import api from "../services/api";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
 import {
   Table,
@@ -64,59 +64,89 @@ function DisplayStudentPage() {
     setDetailStudent(null);
   };
 
+  const handleFileUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+      await api.post("/students/upload", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      alert(t("upload_success"));
+      fetchStudents();
+    } catch (error) {
+      console.error(error);
+      alert(t("upload_failed"));
+    }
+  };
+
   return (
     <div className="container mx-auto p-4 py-6">
       <div className="mb-4 flex justify-end items-center">
-        {/* Form tìm kiếm */}
+        <input
+          type="file"
+          accept=".csv"
+          onChange={(e) => handleFileUpload(e)}
+          className="block w-full text-sm text-gray-500
+                 file:mr-4 file:py-2 file:px-4
+                 file:rounded file:border-0
+                 file:text-sm file:font-semibold
+                 file:bg-blue-50 file:text-blue-700
+                 hover:file:bg-blue-100"
+        />
+
         <form
           onSubmit={handleSearch}
           className="flex items-center gap-2 w-full md:w-auto"
         >
-          {/* Dropdown để chọn kiểu tìm kiếm */}
           <select
             value={searchType}
             onChange={(e) => setSearchType(e.target.value)}
             className="border p-2 rounded"
           >
-            <option value="studentId">{t('search_by_id')}</option>
-            <option value="name">{t('search_by_name')}</option>
-            <option value="faculty">{t('search_by_faculty')}</option>
+            <option value="studentId">{t("search_by_id")}</option>
+            <option value="name">{t("search_by_name")}</option>
+            <option value="faculty">{t("search_by_faculty")}</option>
           </select>
 
-          {/* Input tìm kiếm */}
           <input
             type="text"
-            placeholder={t('search_placeholder')}
+            placeholder={t("search_placeholder")}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="border p-2 rounded w-full"
+            className="border p-2 rounded min-w-[200px]"
           />
 
           <button
             type="submit"
             className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700"
           >
-            {t('search_button')}
+            {t("search_button")}
           </button>
         </form>
       </div>
 
-      <h1 className="text-2xl font-bold mb-4">{t('student_list')}</h1>
+      <h1 className="text-2xl font-bold mb-4">{t("student_list")}</h1>
 
       <div className="overflow-x-auto">
         <Table striped>
           <TableHead>
-            <TableHeadCell>{t('student_id')}</TableHeadCell>
-            <TableHeadCell>{t('full_name')}</TableHeadCell>
+            <TableHeadCell>{t("student_id")}</TableHeadCell>
+            <TableHeadCell>{t("full_name")}</TableHeadCell>
             {/* <TableHeadCell>Ngày sinh</TableHeadCell>
                         <TableHeadCell>Giới tính</TableHeadCell> */}
-            <TableHeadCell>{t('faculty')}</TableHeadCell>
-            <TableHeadCell>{t('course')}</TableHeadCell>
+            <TableHeadCell>{t("faculty")}</TableHeadCell>
+            <TableHeadCell>{t("course")}</TableHeadCell>
             {/* <TableHeadCell>Chương trình</TableHeadCell>
                         <TableHeadCell>Địa chỉ</TableHeadCell> */}
-            <TableHeadCell>{t('email')}</TableHeadCell>
-            <TableHeadCell>{t('status')}</TableHeadCell>
-            <TableHeadCell>{t('action')}</TableHeadCell>
+            <TableHeadCell>{t("email")}</TableHeadCell>
+            <TableHeadCell>{t("status")}</TableHeadCell>
+            <TableHeadCell>{t("action")}</TableHeadCell>
           </TableHead>
           <TableBody>
             {dataTable.map((student) => (
@@ -143,7 +173,7 @@ function DisplayStudentPage() {
                     onClick={() => showStudentDetails(student)}
                     className="bg-blue-500 text-white py-1 px-3 rounded hover:bg-blue-700"
                   >
-                    {t('detail')}
+                    {t("detail")}
                   </button>
                 </TableCell>
               </TableRow>
@@ -155,24 +185,47 @@ function DisplayStudentPage() {
       {/* Modal chi tiết sinh viên */}
       {showDetail && detailStudent && (
         <Modal show={showDetail} onClose={closeDetailDialog}>
-          <ModalHeader>{t('student_details')}</ModalHeader>
+          <ModalHeader>{t("student_details")}</ModalHeader>
           <ModalBody>
             <div className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                <div className="mb-2"><strong>{t('student_id')}:</strong> {detailStudent.studentId}</div>
-                <div className="mb-2"><strong>{t('full_name')}:</strong> {detailStudent.fullName}</div>
-                <div className="mb-2"><strong>{t('date_of_birth')}:</strong> {new Date(detailStudent.dateOfBirth).toLocaleDateString()}</div>
-                <div className="mb-2"><strong>{t('gender')}:</strong> {detailStudent.gender}</div>
-                <div className="mb-2"><strong>{t('faculty')}:</strong> {detailStudent.faculty}</div>
-                <div className="mb-2"><strong>{t('course')}:</strong> {detailStudent.course}</div>
-                <div className="mb-2"><strong>{t('program')}:</strong> {detailStudent.program}</div>
-                <div className="mb-2"><strong>{t('address')}:</strong> {detailStudent.address}</div>
-                <div className="mb-2"><strong>{t('email')}:</strong> {detailStudent.email}</div>
-                <div className="mb-2"><strong>{t('phone')}:</strong> {detailStudent.phoneNumber}</div>
-                <div className="mb-2"><strong>{t('status')}:</strong> {detailStudent.studentStatus}</div>
+              <div className="mb-2">
+                <strong>{t("student_id")}:</strong> {detailStudent.studentId}
+              </div>
+              <div className="mb-2">
+                <strong>{t("full_name")}:</strong> {detailStudent.fullName}
+              </div>
+              <div className="mb-2">
+                <strong>{t("date_of_birth")}:</strong>{" "}
+                {new Date(detailStudent.dateOfBirth).toLocaleDateString()}
+              </div>
+              <div className="mb-2">
+                <strong>{t("gender")}:</strong> {detailStudent.gender}
+              </div>
+              <div className="mb-2">
+                <strong>{t("faculty")}:</strong> {detailStudent.faculty}
+              </div>
+              <div className="mb-2">
+                <strong>{t("course")}:</strong> {detailStudent.course}
+              </div>
+              <div className="mb-2">
+                <strong>{t("program")}:</strong> {detailStudent.program}
+              </div>
+              <div className="mb-2">
+                <strong>{t("address")}:</strong> {detailStudent.address}
+              </div>
+              <div className="mb-2">
+                <strong>{t("email")}:</strong> {detailStudent.email}
+              </div>
+              <div className="mb-2">
+                <strong>{t("phone")}:</strong> {detailStudent.phoneNumber}
+              </div>
+              <div className="mb-2">
+                <strong>{t("status")}:</strong> {detailStudent.studentStatus}
+              </div>
             </div>
           </ModalBody>
           <ModalFooter>
-            <Button onClick={closeDetailDialog}>{t('close')}</Button>
+            <Button onClick={closeDetailDialog}>{t("close")}</Button>
           </ModalFooter>
         </Modal>
       )}

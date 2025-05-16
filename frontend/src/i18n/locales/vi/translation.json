@@ -142,7 +142,9 @@
   "program": "Chương trình",
   "address": "Địa chỉ",
   "phone": "Số điện thoại",
-  "close": "Đóng"
+  "close": "Đóng",
+  "upload_success": "Tải lên thành công!",
+  "upload_error": "Có lỗi xảy ra khi tải lên."
 }
 
 
