@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 function CreateStudentPage() {
+  const { t } = useTranslation();
+
   const [formData, setFormData] = useState({
     studentId: "",
     fullName: "",
@@ -38,14 +41,14 @@ function CreateStudentPage() {
 
       const result = await res.json();
       if (result.success) {
-        alert("Thêm sinh viên thành công!");
+        alert(t("createStudent.success"));
         setFormData({ ...formData, studentId: "" });
       } else {
-        alert(result.message || "Có lỗi xảy ra, vui lòng thử lại!");
+        alert(result.message || t("createStudent.error"));
       }
     } catch (error) {
       console.error(error);
-      alert("Lỗi kết nối đến máy chủ.");
+      alert(t("createStudent.serverError"));
     }
   };
 
@@ -53,79 +56,84 @@ function CreateStudentPage() {
 
   return (
     <div className="container mx-auto p-4 py-6">
-    <div className="mb-4 flex justify-center items-center px-4">
-      <h1 className="text-2xl font-bold">Thêm sinh viên</h1>
-    </div>
+      <div className="mb-4 flex justify-center items-center px-4">
+        <h1 className="text-2xl font-bold">{t("createStudent.title")}</h1>
+      </div>
       <div className="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md">
         <form onSubmit={handleSubmit} className="space-y-4">
-          {/* Row 1 */}
           <div className="grid grid-cols-2 gap-4">
-            <Input label="Mã số sinh viên" name="studentId" value={formData.studentId} onChange={handleChange} required />
-            <Input label="Họ tên" name="fullName" value={formData.fullName} onChange={handleChange} required />
+            <Input label={t("createStudent.studentId")} name="studentId" value={formData.studentId} onChange={handleChange} required />
+            <Input label={t("createStudent.fullName")} name="fullName" value={formData.fullName} onChange={handleChange} required />
           </div>
 
-          {/* Row 2 */}
           <div className="grid grid-cols-2 gap-4">
-            <Input type="date" label="Ngày sinh" name="dateOfBirth" value={formData.dateOfBirth} onChange={handleChange} required />
-            <Select label="Giới tính" name="gender" value={formData.gender} onChange={handleChange} options={[{ label: "Nam", value: "Male" }, { label: "Nữ", value: "Female" }]} />
-          </div>
-
-          {/* Row 3 */}
-          <div className="grid grid-cols-2 gap-4">
+            <Input type="date" label={t("createStudent.dateOfBirth")} name="dateOfBirth" value={formData.dateOfBirth} onChange={handleChange} required />
             <Select
-              label="Khóa"
-              name="course"
-              value={formData.course}
-              onChange={handleChange}
-              options={courseOptions.map((k) => ({ label: `Khóa ${k}`, value: k }))}
-              placeholder="Chọn khóa"
-            />
-            <Input label="Chương trình" name="program" value={formData.program} onChange={handleChange} required />
-          </div>
-
-          {/* Row 4 */}
-          <div className="grid grid-cols-2 gap-4">
-            <Input label="Khoa" name="faculty" value={formData.faculty} onChange={handleChange} required />
-            <Select
-              label="Tình trạng sinh viên"
-              name="studentStatus"
-              value={formData.studentStatus}
+              label={t("createStudent.gender")}
+              name="gender"
+              value={formData.gender}
               onChange={handleChange}
               options={[
-                { label: "Đang học", value: "Đang học" },
-                { label: "Đã tốt nghiệp", value: "Đã tốt nghiệp" },
-                { label: "Đã thôi học", value: "Đã thôi học" },
-                { label: "Tạm dừng học", value: "Tạm dừng học" },
+                { label: t("createStudent.male"), value: "Male" },
+                { label: t("createStudent.female"), value: "Female" },
               ]}
             />
           </div>
 
-          <h3 className="text-xl font-semibold text-gray-800 mt-6">Thông tin CCCD</h3>
           <div className="grid grid-cols-2 gap-4">
-            <Input label="Số CCCD" name="identityNumber" value={formData.identityNumber} onChange={handleChange} required />
-            <Input label="Nơi cấp" name="identityIssuedPlace" value={formData.identityIssuedPlace} onChange={handleChange} required />
-            <Input type="date" label="Ngày cấp" name="identityIssuedDate" value={formData.identityIssuedDate} onChange={handleChange} required />
-            <Input type="date" label="Ngày hết hạn" name="identityExpiryDate" value={formData.identityExpiryDate} onChange={handleChange} required />
+            <Select
+              label={t("createStudent.course")}
+              name="course"
+              value={formData.course}
+              onChange={handleChange}
+              options={courseOptions.map((k) => ({ label: `${t("createStudent.course")} ${k}`, value: k }))}
+              placeholder={t("createStudent.selectCourse")}
+            />
+            <Input label={t("createStudent.program")} name="program" value={formData.program} onChange={handleChange} required />
           </div>
 
-          <h3 className="text-xl font-semibold text-gray-800 mt-6">Thông tin liên hệ</h3>
           <div className="grid grid-cols-2 gap-4">
-            <Input type="email" label="Email" name="email" value={formData.email} onChange={handleChange} required />
-            <Input label="Số điện thoại" name="phoneNumber" value={formData.phoneNumber} onChange={handleChange} required />
+            <Input label={t("createStudent.faculty")} name="faculty" value={formData.faculty} onChange={handleChange} required />
+            <Select
+              label={t("createStudent.studentStatus")}
+              name="studentStatus"
+              value={formData.studentStatus}
+              onChange={handleChange}
+              options={[
+                { label: t("createStudent.statusStudying"), value: "Đang học" },
+                { label: t("createStudent.statusGraduated"), value: "Đã tốt nghiệp" },
+                { label: t("createStudent.statusDropped"), value: "Đã thôi học" },
+                { label: t("createStudent.statusPaused"), value: "Tạm dừng học" },
+              ]}
+            />
           </div>
 
-          <h3 className="text-xl font-semibold text-gray-800 mt-6">Địa chỉ</h3>
-          <Input label="Địa chỉ thường trú" name="permanentAddress" value={formData.permanentAddress} onChange={handleChange} required />
-          <Input label="Địa chỉ hiện tại" name="currentAddress" value={formData.currentAddress} onChange={handleChange} required />
-          <Input label="Địa chỉ liên hệ" name="mailingAddress" value={formData.mailingAddress} onChange={handleChange} required />
-          <Input label="Quốc tịch" name="nationality" value={formData.nationality} onChange={handleChange} required />
+          <h3 className="text-xl font-semibold text-gray-800 mt-6">{t("createStudent.identityInfo")}</h3>
+          <div className="grid grid-cols-2 gap-4">
+            <Input label={t("createStudent.identityNumber")} name="identityNumber" value={formData.identityNumber} onChange={handleChange} required />
+            <Input label={t("createStudent.identityIssuedPlace")} name="identityIssuedPlace" value={formData.identityIssuedPlace} onChange={handleChange} required />
+            <Input type="date" label={t("createStudent.identityIssuedDate")} name="identityIssuedDate" value={formData.identityIssuedDate} onChange={handleChange} required />
+            <Input type="date" label={t("createStudent.identityExpiryDate")} name="identityExpiryDate" value={formData.identityExpiryDate} onChange={handleChange} required />
+          </div>
+
+          <h3 className="text-xl font-semibold text-gray-800 mt-6">{t("createStudent.contactInfo")}</h3>
+          <div className="grid grid-cols-2 gap-4">
+            <Input type="email" label={t("createStudent.email")} name="email" value={formData.email} onChange={handleChange} required />
+            <Input label={t("createStudent.phoneNumber")} name="phoneNumber" value={formData.phoneNumber} onChange={handleChange} required />
+          </div>
+
+          <h3 className="text-xl font-semibold text-gray-800 mt-6">{t("createStudent.addressInfo")}</h3>
+          <Input label={t("createStudent.permanentAddress")} name="permanentAddress" value={formData.permanentAddress} onChange={handleChange} required />
+          <Input label={t("createStudent.currentAddress")} name="currentAddress" value={formData.currentAddress} onChange={handleChange} required />
+          <Input label={t("createStudent.mailingAddress")} name="mailingAddress" value={formData.mailingAddress} onChange={handleChange} required />
+          <Input label={t("createStudent.nationality")} name="nationality" value={formData.nationality} onChange={handleChange} required />
 
           <div className="flex justify-center pt-4">
             <button
               type="submit"
-              className="bg-blue-500 hover:bg-blue-700 font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline"
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline"
             >
-              Gửi
+              {t("createStudent.submit")}
             </button>
           </div>
         </form>

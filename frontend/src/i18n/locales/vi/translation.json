@@ -1,0 +1,148 @@
+{
+  "welcome": "Chào mừng",
+  "language": "Ngôn ngữ",
+  "navbar": {
+    "home": "Trang chủ",
+    "students": "Sinh viên",
+    "courses": "Khóa học",
+    "classes": "Lớp học",
+    "language": "Đổi ngôn ngữ"
+  },
+  "sidebar": {
+    "home": "Trang chủ",
+    "student": "Sinh viên",
+    "studentList": "Danh sách sinh viên",
+    "addStudent": "Thêm sinh viên",
+    "course": "Khóa học",
+    "courseList": "Danh sách khóa học",
+    "addCourse": "Thêm khóa học",
+    "class": "Lớp học",
+    "classList": "Danh sách lớp học",
+    "addClass": "Thêm lớp học",
+    "addStudentToClass": "Thêm sinh viên vào lớp"
+  },
+  "createStudent": {
+    "title": "Thêm sinh viên",
+    "studentId": "Mã số sinh viên",
+    "fullName": "Họ tên",
+    "dateOfBirth": "Ngày sinh",
+    "gender": "Giới tính",
+    "male": "Nam",
+    "female": "Nữ",
+    "course": "Khóa",
+    "selectCourse": "Chọn khóa",
+    "program": "Chương trình",
+    "faculty": "Khoa",
+    "studentStatus": "Tình trạng sinh viên",
+    "statusStudying": "Đang học",
+    "statusGraduated": "Đã tốt nghiệp",
+    "statusDropped": "Đã thôi học",
+    "statusPaused": "Tạm dừng học",
+    "identityInfo": "Thông tin CCCD",
+    "identityNumber": "Số CCCD",
+    "identityIssuedPlace": "Nơi cấp",
+    "identityIssuedDate": "Ngày cấp",
+    "identityExpiryDate": "Ngày hết hạn",
+    "contactInfo": "Thông tin liên hệ",
+    "email": "Email",
+    "phoneNumber": "Số điện thoại",
+    "addressInfo": "Địa chỉ",
+    "permanentAddress": "Địa chỉ thường trú",
+    "currentAddress": "Địa chỉ hiện tại",
+    "mailingAddress": "Địa chỉ liên hệ",
+    "nationality": "Quốc tịch",
+    "submit": "Gửi",
+    "success": "Thêm sinh viên thành công!",
+    "error": "Có lỗi xảy ra, vui lòng thử lại!",
+    "serverError": "Lỗi kết nối đến máy chủ."
+  },
+    "displayCourse": {
+    "title": "Danh sách khóa học",
+    "fetchError": "Lỗi khi lấy dữ liệu khóa học:",
+    "columns": {
+      "courseCode": "Mã khóa học",
+      "courseName": "Tên môn",
+      "creditHours": "Số tín chỉ",
+      "department": "Khoa",
+      "description": "Mô tả",
+      "prerequisite": "Tiên quyết"
+    }
+  },
+  "addCourse": {
+    "title": "Thêm khóa học",
+    "success": "Khóa học đã được thêm thành công!",
+    "error": "Thêm khóa học thất bại. Vui lòng thử lại.",
+    "courseCode": "Mã khóa học",
+    "courseName": "Tên môn học",
+    "creditHours": "Số tín chỉ",
+    "department": "Khoa",
+    "description": "Mô tả",
+    "descriptionPlaceholder": "Nhập mô tả khóa học",
+    "prerequisite": "Tiên quyết (nếu có)",
+    "prerequisitePlaceholder": "Nhập môn học tiên quyết (nếu có)",
+    "submit": "Thêm khóa học"
+  },
+  "displayClass": {
+    "title": "Danh sách Lớp Học",
+    "errorFetch": "Lỗi khi lấy dữ liệu lớp học:",
+    "columns": {
+      "classCode": "Mã lớp",
+      "courseCode": "Mã môn học",
+      "academicYear": "Năm học",
+      "semester": "Học kỳ",
+      "lecturer": "Giảng viên",
+      "maxStudents": "Số SV tối đa",
+      "schedule": "Lịch học",
+      "classroom": "Phòng học"
+    }
+  },
+  "addClass": {
+    "title": "Thêm Lớp Học",
+    "success": "Lớp học đã được thêm thành công!",
+    "error": "Thêm lớp học thất bại. Vui lòng thử lại.",
+    "submit": "Thêm Lớp Học",
+    "labels": {
+      "classCode": "Mã lớp học",
+      "courseCode": "Mã môn học",
+      "academicYear": "Năm học",
+      "semester": "Học kỳ",
+      "lecturer": "Giảng viên",
+      "maxStudents": "Số sinh viên tối đa",
+      "schedule": "Lịch học",
+      "classroom": "Phòng học"
+    }
+  },
+  "addStudentToClass": {
+    "title": "Thêm Sinh Viên Vào Lớp",
+    "success": "Sinh viên đã được thêm vào lớp học!",
+    "error": "Thêm thất bại. Vui lòng kiểm tra lại thông tin.",
+    "submit": "Thêm Sinh Viên",
+    "labels": {
+      "studentId": "Mã số sinh viên",
+      "classCode": "Mã lớp học"
+    }
+  },
+  "student_list": "Danh sách sinh viên",
+  "search_by_id": "Tìm theo mã sinh viên",
+  "search_by_name": "Tìm theo tên",
+  "search_by_faculty": "Tìm theo khoa",
+  "search_placeholder": "Nhập từ khóa tìm kiếm",
+  "search_button": "Tìm",
+  "student_id": "Mã SV",
+  "full_name": "Họ tên",
+  "faculty": "Khoa",
+  "course": "Khóa",
+  "email": "Email",
+  "status": "Tình trạng",
+  "action": "Hành động",
+  "detail": "Chi tiết",
+  "student_details": "Chi tiết sinh viên",
+  "date_of_birth": "Ngày sinh",
+  "gender": "Giới tính",
+  "program": "Chương trình",
+  "address": "Địa chỉ",
+  "phone": "Số điện thoại",
+  "close": "Đóng"
+}
+
+

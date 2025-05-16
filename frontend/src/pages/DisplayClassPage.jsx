@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import api from "../services/api";
 
 function DisplayClassPage() {
+  const { t } = useTranslation();
   const [classes, setClasses] = useState([]);
 
   useEffect(() => {
@@ -14,31 +15,31 @@ function DisplayClassPage() {
       const res = await api.get("/classes");
       setClasses(res.data || []);
     } catch (error) {
-      console.error("Lỗi khi lấy dữ liệu lớp học:", error);
+      console.error(t("displayClass.errorFetch"), error);
     }
   };
 
   return (
     <div className="container mx-auto p-4 py-6">
       <div className="mb-4 flex justify-between items-center px-4">
-        <h1 className="text-2xl font-bold">Danh sách Lớp Học</h1>
+        <h1 className="text-2xl font-bold">{t("displayClass.title")}</h1>
       </div>
 
       <table className="min-w-full bg-white border border-gray-300 shadow-md rounded-lg">
         <thead>
           <tr className="bg-gray-200">
             {[
-              "Mã lớp",
-              "Mã môn học",
-              "Năm học",
-              "Học kỳ",
-              "Giảng viên",
-              "Số SV tối đa",
-              "Lịch học",
-              "Phòng học",
+              "classCode",
+              "courseCode",
+              "academicYear",
+              "semester",
+              "lecturer",
+              "maxStudents",
+              "schedule",
+              "classroom",
             ].map((col) => (
               <th key={col} className="py-2 px-4 border-b text-left">
-                {col}
+                {t(`displayClass.columns.${col}`)}
               </th>
             ))}
           </tr>
@@ -52,9 +53,7 @@ function DisplayClassPage() {
               <td className="py-2 px-4 border-b">{cls.semester}</td>
               <td className="py-2 px-4 border-b">{cls.lecturer}</td>
               <td className="py-2 px-4 border-b">{cls.maxStudents}</td>
-              <td className="py-2 px-4 border-b">
-                {cls.schedule}
-              </td>
+              <td className="py-2 px-4 border-b">{cls.schedule}</td>
               <td className="py-2 px-4 border-b">{cls.classroom}</td>
             </tr>
           ))}

@@ -2,6 +2,7 @@ import { Sidebar, SidebarCollapse, SidebarItem, SidebarItemGroup, SidebarItems }
 import { HiHome, HiUserGroup, HiBookOpen, HiAcademicCap } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export function MySidebar() {
   const [openCollapse, setOpenCollapse] = useState("");
@@ -9,6 +10,8 @@ export function MySidebar() {
   const handleCollapse = (name) => {
     setOpenCollapse((prev) => (prev === name ? "" : name));
   };
+
+  const { t } = useTranslation();
 
   return (
     <div className="fixed top-14 left-0 bottom-0 w-64 text-white">
@@ -18,41 +21,41 @@ export function MySidebar() {
 
             {/* Home */}
             <SidebarItem as={Link} to="/" icon={HiHome}>
-              Trang chủ
+              {t("sidebar.home")}
             </SidebarItem>
 
             {/* Student Section */}
             <SidebarCollapse
               icon={HiUserGroup}
-              label="Sinh viên"
+              label={t("sidebar.student")}
               open={openCollapse === "student"}
               onClick={() => handleCollapse("student")}
             >
-              <SidebarItem as={Link} to="/students">Danh sách sinh viên</SidebarItem>
-              <SidebarItem as={Link} to="/add-student">Thêm sinh viên</SidebarItem>
+              <SidebarItem as={Link} to="/students">{t("sidebar.studentList")}</SidebarItem>
+              <SidebarItem as={Link} to="/add-student"> {t("sidebar.addStudent")}</SidebarItem>
             </SidebarCollapse>
 
             {/* Course Section */}
             <SidebarCollapse
               icon={HiBookOpen}
-              label="Khóa học"
+              label={t("sidebar.course")}
               open={openCollapse === "course"}
               onClick={() => handleCollapse("course")}
             >
-              <SidebarItem as={Link} to="/courses">Danh sách khóa học</SidebarItem>
-              <SidebarItem as={Link} to="/add-course">Thêm khóa học</SidebarItem>
+              <SidebarItem as={Link} to="/courses"> {t("sidebar.courseList")}</SidebarItem>
+              <SidebarItem as={Link} to="/add-course">{t("sidebar.addCourse")}</SidebarItem>
             </SidebarCollapse>
 
             {/* Class Section */}
             <SidebarCollapse
               icon={HiAcademicCap}
-              label="Lớp học"
+              label={t("sidebar.class")}
               open={openCollapse === "class"}
               onClick={() => handleCollapse("class")}
             >
-              <SidebarItem as={Link} to="/classes">Danh sách lớp học</SidebarItem>
-              <SidebarItem as={Link} to="/add-class">Thêm lớp học</SidebarItem>
-              <SidebarItem as={Link} to="/add-student-to-class">Thêm sinh viên vào lớp</SidebarItem>
+              <SidebarItem as={Link} to="/classes">{t("sidebar.classList")}</SidebarItem>
+              <SidebarItem as={Link} to="/add-class">{t("sidebar.addClass")}</SidebarItem>
+              <SidebarItem as={Link} to="/add-student-to-class">{t("sidebar.addStudentToClass")}</SidebarItem>
             </SidebarCollapse>
 
           </SidebarItemGroup>

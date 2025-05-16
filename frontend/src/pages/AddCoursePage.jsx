@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import api from "../services/api";
 
 function AddCoursePage() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const [form, setForm] = useState({
@@ -33,66 +35,63 @@ function AddCoursePage() {
 
     try {
       await api.post("/courses", payload);
-      setSuccess("Khóa học đã được thêm thành công!");
-      setTimeout(() => navigate("/courses"), 1500); // Redirect sau 1.5s
+      setSuccess(t("addCourse.success"));
+      setError("");
+      setTimeout(() => navigate("/courses"), 1500);
     } catch (err) {
-      console.error("Lỗi khi thêm khóa học:", err);
-      setError("Thêm khóa học thất bại. Vui lòng thử lại.");
+      console.error(t("addCourse.error"), err);
+      setError(t("addCourse.error"));
+      setSuccess("");
     }
   };
 
   return (
     <div className="container mx-auto p-4 py-6">
-    <div className="mb-4 flex justify-center items-center px-4">
-      <h1 className="text-2xl font-bold">Thêm khóa học</h1>
-    </div>
+      <div className="mb-4 flex justify-center items-center px-4">
+        <h1 className="text-2xl font-bold">{t("addCourse.title")}</h1>
+      </div>
       <div className="max-w-screen-lg mx-auto bg-white p-6 rounded-lg shadow-md">
-
         {error && <div className="text-red-600 mb-4">{error}</div>}
         {success && <div className="text-green-600 mb-4">{success}</div>}
 
         <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Row 1 */}
           <div className="grid grid-cols-2 gap-6">
-            <Input label="Mã khóa học" name="courseCode" value={form.courseCode} onChange={handleChange} required />
-            <Input label="Tên môn học" name="courseName" value={form.courseName} onChange={handleChange} required />
+            <Input label={t("addCourse.courseCode")} name="courseCode" value={form.courseCode} onChange={handleChange} required />
+            <Input label={t("addCourse.courseName")} name="courseName" value={form.courseName} onChange={handleChange} required />
           </div>
 
-          {/* Row 2 */}
           <div className="grid grid-cols-2 gap-6">
             <Input
-              label="Số tín chỉ"
+              label={t("addCourse.creditHours")}
               name="creditHours"
               value={form.creditHours}
               onChange={handleChange}
               type="number"
               required
             />
-            <Input label="Khoa" name="department" value={form.department} onChange={handleChange} required />
+            <Input label={t("addCourse.department")} name="department" value={form.department} onChange={handleChange} required />
           </div>
 
-          {/* Row 3 */}
           <div>
-            <label className="block text-gray-700 text-sm font-bold mb-2 text-left">Mô tả</label>
+            <label className="block text-gray-700 text-sm font-bold mb-2 text-left">{t("addCourse.description")}</label>
             <textarea
               name="description"
               value={form.description}
               onChange={handleChange}
               required
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline h-32"
-              placeholder="Nhập mô tả khóa học"
+              placeholder={t("addCourse.descriptionPlaceholder")}
             />
           </div>
 
-          {/* Row 4 */}
           <div>
-            <label className="block text-gray-700 text-sm font-bold mb-2 text-left">Tiên quyết (nếu có)</label>
+            <label className="block text-gray-700 text-sm font-bold mb-2 text-left">{t("addCourse.prerequisite")}</label>
             <input
               name="prerequisite"
               value={form.prerequisite}
               onChange={handleChange}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              placeholder="Nhập môn học tiên quyết (nếu có)"
+              placeholder={t("addCourse.prerequisitePlaceholder")}
             />
           </div>
 
@@ -101,7 +100,7 @@ function AddCoursePage() {
               type="submit"
               className="bg-blue-500 hover:bg-blue-700 font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline"
             >
-              Thêm Khóa Học
+              {t("addCourse.submit")}
             </button>
           </div>
         </form>
@@ -110,7 +109,6 @@ function AddCoursePage() {
   );
 }
 
-// Subcomponent for Input
 function Input({ label, name, value, onChange, type = "text", required = false }) {
   return (
     <div>
