@@ -99,4 +99,7 @@ npx vitest run
 ### Các tính năng đã làm được
 - Tích hợp thư viện i18next cho tính năng đa ngôn ngữ (Tiếng Anh và Tiếng Việt).
 - Xuất bảng điểm cho sinh viên (Gặp phải lỗi font Tiếng Việt).
-- Thêm sinh viên bằng file CSV.
+- Thêm danh sách sinh viên bằng file CSV.
+- Viết thêm unit test cho frontend và backend.
+- Loại bỏ các code ejs cũ trong phần views của mô hình MVC vì đã không còn sử dụng.
+- Tái cấu trúc dự án nhằm tách biệt rõ ràng giữa UI, Business Logic Data Access. Frontend sử dụng React, Backend sử dụng Express và Nodejs, Database sử dụng MongoDB.
