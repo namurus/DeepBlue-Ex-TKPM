@@ -1,8 +1,8 @@
 import express from "express";
 import multer from 'multer';
 
-import studentController from "../controllers/studentController";
-import validateRegistration from "../middlewares/emailDomainValidate";
+import studentController from "../controllers/student.controller";
+import validateRegistration from "../middlewares/emailDomainValidate.middleware";
 import uploadFileMiddleware from "../middlewares/uploadFile";
 
 const router = express.Router();

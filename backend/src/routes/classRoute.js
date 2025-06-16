@@ -1,5 +1,5 @@
 import express from "express";
-import classController from "../controllers/classController";
+import classController from "../controllers/class.controller";
 const router = express.Router();
 
 router.get("/", classController.getAllClasses);

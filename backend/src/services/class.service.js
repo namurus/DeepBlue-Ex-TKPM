@@ -1,13 +1,15 @@
-const Class = require('../models/class.model'); // Assuming the Class model is in ../models/Class
-const Student = require('../models/student.model'); // Assuming the Student model is in ../models/Student
-const Enrollment = require('../models/enrollment.model'); // Assuming the Enrollment model is in ../models/Enrollment
+const Class = require('../models/class.model'); 
+const Student = require('../models/student.model'); 
+const Enrollment = require('../models/enrollment.model');
+const ApiError = require('../utils/ApiError'); 
+import { StatusCodes } from 'http-status-codes';
 
 async function getAllClasses() {
     try {
         const classes = await Class.find();
         return classes;
     } catch (error) {
-        throw new Error(`Error fetching classes: ${error.message}`);
+        throw new ApiError(StatusCodes.INTERNAL_SERVER_ERROR, `Error fetching classes: ${error.message}`);
     }
 }
 
@@ -16,7 +18,7 @@ async function createClass(classData) {
         // Check if a class with the same classCode already exists
         const existingClass = await Class.findOne({ classCode: classData.classCode });
         if (existingClass) {
-            throw new Error('Class with this code already exists.');
+            throw new ApiError(StatusCodes.CONFLICT, 'Class with this code already exists.');
         }
 
         // Create a new class
@@ -25,7 +27,7 @@ async function createClass(classData) {
 
         return newClass;
     } catch (error) {
-        throw new Error(`Error creating class: ${error.message}`);
+        throw new ApiError(StatusCodes.INTERNAL_SERVER_ERROR, `Error creating class: ${error.message}`);
     }
 }
 
@@ -35,7 +37,7 @@ async function addStudentToClass(studentId, classCode) {
         const student = await Student
             .findOne({ studentId: studentId });
         if (!student) {
-            throw new Error('Student not found.');
+            throw new ApiError(StatusCodes.NOT_FOUND, 'Student not found.');
         }
 
         // Check if the class exists
@@ -45,7 +47,7 @@ async function addStudentToClass(studentId, classCode) {
         });
 
         if (!classData) {
-            throw new Error('Class not found.');
+            throw new ApiError(StatusCodes.NOT_FOUND, 'Class not found.');
         }
 
         // Check if the student is already enrolled in the class
@@ -54,10 +56,10 @@ async function addStudentToClass(studentId, classCode) {
             classCode: classCode
         });
         if (existingEnrollment) {
-            throw new Error('Student is already enrolled in this class.');
+            throw new ApiError(StatusCodes.CONFLICT, 'Student is already enrolled in this class.');
         }
         if(classData.registeredCount >= classData.maxStudents) {
-            throw new Error('Class is full.');
+            throw new ApiError(StatusCodes.BAD_REQUEST, 'Class is full. Cannot enroll more students.');
         }
         // Increment the registered count for the class
         classData.registeredCount += 1;
@@ -72,11 +74,9 @@ async function addStudentToClass(studentId, classCode) {
         return enrollment;
     }
     catch (error) {
-        throw new Error(`Error adding student to class: ${error.message}`);
+        throw new ApiError(StatusCodes.INTERNAL_SERVER_ERROR, `Error adding student to class: ${error.message}`);
     }
 }
-
-
 
 module.exports = {
         getAllClasses,

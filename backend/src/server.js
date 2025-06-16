@@ -1,6 +1,5 @@
 import express from "express";
 import bodyParser from "body-parser";
-import viewEngine from "./config/viewEngine";
 import initWebRoutes from "./routes/index";
 import connectDB from "./config/connectDB";
 import logger from "./config/logger";
@@ -9,7 +8,7 @@ import fs from "fs";
 import path from "path";
 import morgan from "morgan";
 import cors from "cors";
-
+import { errorHandlingMiddleware } from "./middlewares/errorHandlingMiddleware";
 
 dotenv.config();
 
@@ -26,11 +25,13 @@ app.use(morgan("combined", { stream: accessLogStream }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-viewEngine(app);
+
 initWebRoutes(app);
 connectDB();
 
 let port = process.env.PORT || 6969;
+
+app.use(errorHandlingMiddleware);
 
 app.listen(port, () => {
     logger.info(`Backend Node.js is running on port ${port}`);

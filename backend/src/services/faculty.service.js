@@ -1,5 +1,6 @@
 const Faculty = require('../models/faculty.model');
-
+const ApiError = require('../utils/ApiError');
+const { StatusCodes } = require('http-status-codes');
 
 const getAllFaculties = async () => {
     try {
@@ -7,7 +8,7 @@ const getAllFaculties = async () => {
         return faculties;
     } catch (error) {
         console.error('Error fetching faculties:', error);
-        throw error;
+        throw new ApiError(StatusCodes.INTERNAL_SERVER_ERROR, 'Error fetching faculties');
     }
 }
 
@@ -17,7 +18,7 @@ const createFaculty = async (faculty) => {
         return newFaculty;
     } catch (error) {
         console.error('Error creating faculty:', error);
-        throw error;
+        throw new ApiError(StatusCodes.INTERNAL_SERVER_ERROR, 'Error creating faculty');
     }
 }
 
@@ -28,7 +29,7 @@ const updateFaculty = async (facultyId, faculty) => {
     }
     catch (error) {
         console.error('Error updating faculty:', error);
-        throw error;
+        throw new ApiError(StatusCodes.INTERNAL_SERVER_ERROR, 'Error updating faculty');
     }
 }
 

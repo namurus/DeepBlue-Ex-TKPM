@@ -1,5 +1,5 @@
 import express from 'express';
-import gradeController from '../controllers/gradeController';
+import gradeController from '../controllers/grade.controller';
 import exportTranscriptPDF from '../middlewares/exportPDF';
 
 const router = express.Router();
