@@ -38,7 +38,6 @@ const findStudentsByFaculty = async (faculty) => {
     }
 };
 
-
 const findStudentsByFacultyAndName = async (faculty, name) => {
     try {
         const students = await Student.find({
@@ -116,6 +115,7 @@ module.exports = {
     deleteStudent: deleteStudent,
     findStudentById: findStudentById,
     findStudentsByFaculty: findStudentsByFaculty,
+    findStudentsByName: findStudentsByName,
     findStudentsByFacultyAndName: findStudentsByFacultyAndName,
     updateStudent: updateStudent,
 };

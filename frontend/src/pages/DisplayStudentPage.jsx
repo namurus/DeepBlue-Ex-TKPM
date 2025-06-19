@@ -23,6 +23,9 @@ function DisplayStudentPage() {
   const [detailStudent, setDetailStudent] = useState(null);
   const [showDetail, setShowDetail] = useState(false);
 
+  const [facultyQuery, setFacultyQuery] = useState("");
+  const [nameQuery, setNameQuery] = useState("");
+
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -42,8 +45,14 @@ function DisplayStudentPage() {
     e.preventDefault();
     try {
       const params = new URLSearchParams();
-      if (searchQuery) {
-        params.append(searchType, searchQuery);
+
+      if (searchType === "studentId" && searchQuery) {
+        params.append("studentId", searchQuery);
+      } else if (searchType === "name" && searchQuery) {
+        params.append("name", searchQuery);
+      } else if (searchType === "facultyAndName") {
+        if (facultyQuery) params.append("faculty", facultyQuery);
+        if (nameQuery) params.append("name", nameQuery);
       }
 
       const res = await api.get(`/students?${params.toString()}`);
@@ -130,32 +139,64 @@ function DisplayStudentPage() {
                  file:bg-blue-50 file:text-blue-700
                  hover:file:bg-blue-100"
         />
-
         <form
           onSubmit={handleSearch}
-          className="flex items-center gap-2 w-full md:w-auto"
+          className="flex flex-row items-center gap-2 w-full"
         >
+          {/* Select box */}
           <select
             value={searchType}
-            onChange={(e) => setSearchType(e.target.value)}
-            className="border p-2 rounded"
+            onChange={(e) => {
+              setSearchType(e.target.value);
+              setSearchQuery("");
+              setFacultyQuery("");
+              setNameQuery("");
+            }}
+            className="border p-2 rounded min-w-[150px]"
           >
             <option value="studentId">{t("search_by_id")}</option>
             <option value="name">{t("search_by_name")}</option>
-            <option value="faculty">{t("search_by_faculty")}</option>
+            <option value="facultyAndName">
+              {t("search_by_faculty_name")}
+            </option>
           </select>
 
-          <input
-            type="text"
-            placeholder={t("search_placeholder")}
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="border p-2 rounded min-w-[200px]"
-          />
+          {/* Input field(s) based on selected type */}
+          {searchType === "studentId" || searchType === "name" ? (
+            <input
+              type="text"
+              placeholder={
+                searchType === "studentId"
+                  ? t("enter_student_id")
+                  : t("enter_full_name")
+              }
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="border p-2 rounded min-w-[200px] flex-grow"
+            />
+          ) : (
+            <>
+              <input
+                type="text"
+                placeholder={t("enter_faculty")}
+                value={facultyQuery}
+                onChange={(e) => setFacultyQuery(e.target.value)}
+                className="border p-2 rounded min-w-[150px] flex-grow"
+              />
+              <input
+                type="text"
+                placeholder={t("enter_full_name")}
+                value={nameQuery}
+                onChange={(e) => setNameQuery(e.target.value)}
+                className="border p-2 rounded min-w-[150px] flex-grow"
+              />
+            </>
+          )}
 
+          {/* Submit Button */}
           <button
             type="submit"
-            className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700"
+            className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
           >
             {t("search_button")}
           </button>
@@ -184,19 +225,8 @@ function DisplayStudentPage() {
               <TableRow key={student.studentId}>
                 <TableCell>{student.studentId}</TableCell>
                 <TableCell>{student.fullName}</TableCell>
-                {/* <TableCell>
-                                    {new Date(student.dateOfBirth).toLocaleDateString()}
-                                </TableCell>
-                                <TableCell>{student.gender}</TableCell> */}
                 <TableCell>{student.faculty}</TableCell>
                 <TableCell>{student.course}</TableCell>
-                {/* <TableCell>{student.program}</TableCell>
-                                <TableCell>{student.address}</TableCell> */}
-                {/* <TableCell title={student.email}>
-                                    {student.email.length > 20
-                                        ? student.email.substring(0, 15) + "..."
-                                        : student.email}
-                                </TableCell> */}
                 <TableCell>{student.email}</TableCell>
                 <TableCell>{student.studentStatus}</TableCell>
                 <TableCell>
@@ -213,7 +243,7 @@ function DisplayStudentPage() {
         </Table>
       </div>
 
-      {/* Modal chi tiết sinh viên */}
+      {/* Chi tiết sinh viên */}
       {showDetail && detailStudent && (
         <Modal show={showDetail} onClose={closeDetailDialog}>
           <ModalHeader>{t("student_details")}</ModalHeader>
