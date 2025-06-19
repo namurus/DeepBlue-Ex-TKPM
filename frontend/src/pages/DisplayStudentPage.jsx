@@ -19,7 +19,7 @@ import {
 function DisplayStudentPage() {
   const [dataTable, setDataTable] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
-  const [searchType, setSearchType] = useState("studentId"); // Kiểu tìm kiếm (MSSV, tên, khoa)
+  const [searchType, setSearchType] = useState("studentId");
   const [detailStudent, setDetailStudent] = useState(null);
   const [showDetail, setShowDetail] = useState(false);
 
@@ -210,12 +210,8 @@ function DisplayStudentPage() {
           <TableHead>
             <TableHeadCell>{t("student_id")}</TableHeadCell>
             <TableHeadCell>{t("full_name")}</TableHeadCell>
-            {/* <TableHeadCell>Ngày sinh</TableHeadCell>
-                        <TableHeadCell>Giới tính</TableHeadCell> */}
             <TableHeadCell>{t("faculty")}</TableHeadCell>
             <TableHeadCell>{t("course")}</TableHeadCell>
-            {/* <TableHeadCell>Chương trình</TableHeadCell>
-                        <TableHeadCell>Địa chỉ</TableHeadCell> */}
             <TableHeadCell>{t("email")}</TableHeadCell>
             <TableHeadCell>{t("status")}</TableHeadCell>
             <TableHeadCell>{t("action")}</TableHeadCell>
