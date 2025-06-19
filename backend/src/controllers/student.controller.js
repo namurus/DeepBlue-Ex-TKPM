@@ -1,7 +1,7 @@
-import studentService from '../services/studentService';
+import studentService from '../services/student.service';
 import Student from '../models/student.model';
-
-let getAllStudents = async (req, res) => {
+import { statusCodes } from 'http-status-codes';
+let getAllStudents = async (req, res, next) => {
     try {
         let studentData;
 
@@ -14,23 +14,19 @@ let getAllStudents = async (req, res) => {
             }
             else { studentData = await studentService.findStudentsByFaculty(req.query.faculty); }
         } else if (req.query.name) {
-            studentData = await studentService.findStudentsByName(req.query.name); // 👈 Thêm điều kiện này
+            studentData = await studentService.findStudentsByName(req.query.name);
         } else {
             studentData = await studentService.getAllStudents();
         }
 
-        return res.status(200).json(studentData);
-    } catch (e) {
-        console.log(e);
-        return res.status(500).json({
-            message: 'Error from server',
-            error: e.message
-        });
+        return res.status(statusCodes.OK).json(studentData);
+    } catch (error) {
+        next(error);
     }
 };
 
 
-let createStudent = async (req, res) => {
+let createStudent = async (req, res, next) => {
     try {
         const studentId = req.body.studentId;
         const existingStudent = await Student.findOne({ where: { studentId }, attributes: ["id"] });
@@ -41,43 +37,37 @@ let createStudent = async (req, res) => {
 
         await studentService.createStudent(req.body);
 
-        return res.status(200).json({
+        return res.status(statusCodes.OK).json({
             message: 'Create student successfully',
         });
 
-    } catch (e) {
-        console.error("Lỗi khi tạo sinh viên:", e);
-        return res.status(500).json({
-            message: 'Error from server',
-            error: e.message
-        });
+    } catch (error) {
+        next(error);
     }
 };
 
 
-let deleteStudent = async (req, res) => {
+let deleteStudent = async (req, res, next) => {
     try {
         let data = await studentService.deleteStudent(req.query.id);
-        return res.status(200).json({
+        return res.status(statusCodes.OK).json({
             message: 'Delete student successfully',
         });
-    } catch (e) {
-        console.log(e);
-        return res.status(500).send('An error occurred while deleting student');
+    } catch (error) {
+        next(error);
     }
 }
 
 
-let updateStudent = async (req, res) => {
+let updateStudent = async (req, res, next) => {
     try {
         let data = await studentService.updateStudent(req.body);
-        return res.status(200).json({
+        return res.status(statusCodes.OK).json({
             message: 'Update student successfully',
         });
     }
-    catch (e) {
-        console.log(e);
-        return res.status(500).send('An error occurred while updating student');
+    catch (error) {
+        next(error);
     }
 }
 

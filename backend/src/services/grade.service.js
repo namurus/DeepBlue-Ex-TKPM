@@ -1,4 +1,6 @@
 const Grade = require('../models/grade.model');
+const ApiError = require('../utils/ApiError');
+const { StatusCodes } = require('http-status-codes');
 
 async function addGrade(gradeData) {
     try {
@@ -12,7 +14,7 @@ async function addGrade(gradeData) {
         return newGrade;
     } catch (error) {
         console.error('Error adding grade:', error);
-        throw error;
+        throw ApiError(StatusCodes.INTERNAL_SERVER_ERROR, 'Error adding grade');
     }
 }
 
@@ -23,7 +25,7 @@ async function getGradesByStudentId(studentId) {
 
     } catch (error) {
         console.error('Error fetching grades:', error);
-        throw error;
+        throw ApiError(StatusCodes.INTERNAL_SERVER_ERROR, 'Error fetching grades');
     }
 }
 

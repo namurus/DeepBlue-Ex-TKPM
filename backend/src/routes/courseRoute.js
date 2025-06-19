@@ -1,7 +1,7 @@
 import express from "express"
 const router = express.Router();
 
-import courseController from "../controllers/courseController";
+import courseController from "../controllers/course.controller";
 
 router.get("/", courseController.getAllCourses);
 router.post("/", courseController.addCourse);

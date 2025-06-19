@@ -1,4 +1,7 @@
 const Student = require('../models/student.model');
+const ApiError = require('../utils/ApiError');
+import { StatusCodes } from 'http-status-codes';
+
 const findStudentById = async (studentId) => {
     try {
         const student = await
@@ -7,7 +10,7 @@ const findStudentById = async (studentId) => {
     }
     catch (error) {
         console.error('Error fetching student:', error);
-        throw error;
+        throw ApiError(StatusCodes.INTERNAL_SERVER_ERROR, 'Error fetching student');
     }
 }
 
@@ -23,6 +26,7 @@ const findStudentsByName = async (name) => {
     }
 }
 
+
 const findStudentsByFaculty = async (faculty) => {
     try {
         const students = await StudentFaculty.find({ faculty: faculty });
@@ -30,22 +34,23 @@ const findStudentsByFaculty = async (faculty) => {
         return students.map(sf => sf.studentId); 
     } catch (error) {
         console.error('Error fetching students:', error);
-        throw error;
+        throw ApiError(StatusCodes.INTERNAL_SERVER_ERROR, 'Error fetching students');
     }
 };
 
 const findStudentsByFacultyAndName = async (faculty, name) => {
-  try {
-    const students = await Student.find({
-      faculty: faculty,
-      fullName: { $regex: name, $options: 'i' }
-    });
-    return students;
-  } catch (error) {
-    console.error('Error fetching students:', error);
-    throw error;
-  }
-};
+    try {
+        const students = await Student.find({
+            faculty: faculty,
+            fullName: { $regex: name, $options: 'i' }
+        });
+        return students;
+    }
+    catch (error) {
+        console.error('Error fetching students:', error);
+        throw ApiError(StatusCodes.INTERNAL_SERVER_ERROR, 'Error fetching students');
+    }
+}
 
 const getAllStudents = async () => {
     try {
@@ -53,7 +58,7 @@ const getAllStudents = async () => {
         return students;
     } catch (error) {
         console.error('Error fetching students:', error);
-        throw error;
+        throw ApiError(StatusCodes.INTERNAL_SERVER_ERROR, 'Error fetching students');
     }
 };
 
@@ -63,7 +68,7 @@ const createStudent = async (student) => {
         return newStudent;
     } catch (error) {
         console.error('Gặp lỗi khi thêm sinh viên:', error);
-        throw error;
+        throw ApiError(StatusCodes.INTERNAL_SERVER_ERROR, 'Error creating student');
     }
 }
 
@@ -73,7 +78,7 @@ const deleteStudent = async (studentId) => {
     }
     catch (error) {
         console.error('Gặp lỗi khi xóa sinh viên:', error);
-        throw error;
+        throw ApiError(StatusCodes.INTERNAL_SERVER_ERROR, 'Error deleting student');
     }
 }
 
@@ -83,15 +88,15 @@ const updateStudent = async (student) => {
         const prevStudent = await Student.findOne({ studentId: studentId });
         if(prevStudent.studentStatus === 'Đã tốt nghiệp')
         {
-            throw new Error('Sinh viên đã tốt nghiệp!');
+            throw new ApiError(StatusCodes.BAD_REQUEST, 'Sinh viên đã tốt nghiệp!');
         }
         if(prevStudent.studentStatus === 'Đã thôi học')
         {
-            throw new Error('Sinh viên đã thôi học!');
+            throw new ApiError(StatusCodes.BAD_REQUEST, 'Sinh viên đã thôi học!');
         }
         if(prevStudent.studentStatus === 'Tạm dừng học' && student.studentStatus !== 'Đã tốt nghiệp')
         {
-            throw new Error('Sinh viên đang tạm dừng học!');
+            throw new ApiError(StatusCodes.BAD_REQUEST, 'Sinh viên đang tạm dừng học!');
         }
         const updatedStudent = await Student.findOneAndUpdate({ studentId: studentId }, student, { new: true });
 
@@ -99,12 +104,13 @@ const updateStudent = async (student) => {
     }
     catch (error) {
         console.error('Gặp lỗi khi cập nhật thông tin sinh viên:', error);
-        throw error;
+        throw ApiError(StatusCodes.INTERNAL_SERVER_ERROR, 'Error updating student');
     }
 }
 
 module.exports = {
     getAllStudents: getAllStudents,
+    findStudentsByName: findStudentsByName,
     createStudent: createStudent,
     deleteStudent: deleteStudent,
     findStudentById: findStudentById,
