@@ -1,6 +1,6 @@
 import studentService from '../services/student.service';
 import Student from '../models/student.model';
-import { statusCodes } from 'http-status-codes';
+import { StatusCodes } from 'http-status-codes';
 let getAllStudents = async (req, res, next) => {
     try {
         let studentData;
@@ -19,7 +19,7 @@ let getAllStudents = async (req, res, next) => {
             studentData = await studentService.getAllStudents();
         }
 
-        return res.status(statusCodes.OK).json(studentData);
+        return res.status(StatusCodes.OK).json(studentData);
     } catch (error) {
         next(error);
     }
@@ -37,7 +37,7 @@ let createStudent = async (req, res, next) => {
 
         await studentService.createStudent(req.body);
 
-        return res.status(statusCodes.OK).json({
+        return res.status(StatusCodes.OK).json({
             message: 'Create student successfully',
         });
 
@@ -50,7 +50,7 @@ let createStudent = async (req, res, next) => {
 let deleteStudent = async (req, res, next) => {
     try {
         let data = await studentService.deleteStudent(req.query.id);
-        return res.status(statusCodes.OK).json({
+        return res.status(StatusCodes.OK).json({
             message: 'Delete student successfully',
         });
     } catch (error) {
@@ -62,7 +62,7 @@ let deleteStudent = async (req, res, next) => {
 let updateStudent = async (req, res, next) => {
     try {
         let data = await studentService.updateStudent(req.body);
-        return res.status(statusCodes.OK).json({
+        return res.status(StatusCodes.OK).json({
             message: 'Update student successfully',
         });
     }

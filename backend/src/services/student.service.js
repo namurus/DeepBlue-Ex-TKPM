@@ -21,8 +21,7 @@ const findStudentsByName = async (name) => {
         });
         return students;
     } catch (error) {
-        console.error('Error fetching students by name:', error);
-        throw error;
+        throw ApiError(StatusCodes.INTERNAL_SERVER_ERROR, 'Error fetching students by name');
     }
 }
 
