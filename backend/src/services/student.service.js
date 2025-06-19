@@ -14,6 +14,19 @@ const findStudentById = async (studentId) => {
     }
 }
 
+const findStudentsByName = async (name) => {
+    try {
+        const students = await Student.find({
+            fullName: { $regex: name, $options: 'i' }
+        });
+        return students;
+    } catch (error) {
+        console.error('Error fetching students by name:', error);
+        throw error;
+    }
+}
+
+
 const findStudentsByFaculty = async (faculty) => {
     try {
         const students = await StudentFaculty.find({ faculty: faculty });
@@ -28,7 +41,10 @@ const findStudentsByFaculty = async (faculty) => {
 
 const findStudentsByFacultyAndName = async (faculty, name) => {
     try {
-        const students = await Student.find({ faculty: faculty, name: name });
+        const students = await Student.find({
+            faculty: faculty,
+            fullName: { $regex: name, $options: 'i' }
+        });
         return students;
     }
     catch (error) {
@@ -95,6 +111,7 @@ const updateStudent = async (student) => {
 
 module.exports = {
     getAllStudents: getAllStudents,
+    findStudentsByName: findStudentsByName,
     createStudent: createStudent,
     deleteStudent: deleteStudent,
     findStudentById: findStudentById,

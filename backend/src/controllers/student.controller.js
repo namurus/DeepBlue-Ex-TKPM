@@ -1,6 +1,6 @@
 import studentService from '../services/student.service';
 import Student from '../models/student.model';
-import {statusCodes} from 'http-status-codes';
+import { statusCodes } from 'http-status-codes';
 let getAllStudents = async (req, res, next) => {
     try {
         let studentData;
@@ -13,6 +13,8 @@ let getAllStudents = async (req, res, next) => {
                 studentData = await studentService.findStudentsByFacultyAndName(req.query.faculty, req.query.name);
             }
             else { studentData = await studentService.findStudentsByFaculty(req.query.faculty); }
+        } else if (req.query.name) {
+            studentData = await studentService.findStudentsByName(req.query.name);
         } else {
             studentData = await studentService.getAllStudents();
         }
