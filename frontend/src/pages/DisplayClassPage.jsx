@@ -7,17 +7,16 @@ function DisplayClassPage() {
   const [classes, setClasses] = useState([]);
 
   useEffect(() => {
+    const fetchClasses = async () => {
+      try {
+        const res = await api.get("/classes");
+        setClasses(res.data || []);
+      } catch (error) {
+        console.error(t("displayClass.errorFetch"), error);
+      }
+    };
     fetchClasses();
-  }, []);
-
-  const fetchClasses = async () => {
-    try {
-      const res = await api.get("/classes");
-      setClasses(res.data || []);
-    } catch (error) {
-      console.error(t("displayClass.errorFetch"), error);
-    }
-  };
+  }, [t]);
 
   return (
     <div className="container mx-auto p-4 py-6">

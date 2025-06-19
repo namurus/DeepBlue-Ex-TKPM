@@ -7,17 +7,17 @@ function DisplayCoursePage() {
   const [courses, setCourses] = useState([]);
 
   useEffect(() => {
-    fetchCourses();
-  }, []);
+    const fetchCourses = async () => {
+      try {
+        const res = await api.get("/courses");
+        setCourses(res.data || []);
+      } catch (error) {
+        console.error(t("displayCourse.fetchError"), error);
+      }
+    };
 
-  const fetchCourses = async () => {
-    try {
-      const res = await api.get("/courses");
-      setCourses(res.data || []);
-    } catch (error) {
-      console.error(t("displayCourse.fetchError"), error);
-    }
-  };
+    fetchCourses();
+  }, [t]);
 
   return (
     <div>

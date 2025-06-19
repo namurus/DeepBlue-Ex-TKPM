@@ -13,6 +13,8 @@ let getAllStudents = async (req, res) => {
                 studentData = await studentService.findStudentsByFacultyAndName(req.query.faculty, req.query.name);
             }
             else { studentData = await studentService.findStudentsByFaculty(req.query.faculty); }
+        } else if (req.query.name) {
+            studentData = await studentService.findStudentsByName(req.query.name); // 👈 Thêm điều kiện này
         } else {
             studentData = await studentService.getAllStudents();
         }
