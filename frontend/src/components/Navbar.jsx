@@ -1,4 +1,3 @@
-
 import { Navbar, NavbarBrand, NavbarCollapse, NavbarLink, NavbarToggle } from "flowbite-react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -9,7 +8,6 @@ export function MyNavbar() {
     i18n.changeLanguage(lng);
   };
   return (
-    // <Navbar fluid rounded className="bg-gradient-to-r from-teal-200 to-lime-200">
     <Navbar fluid rounded className="bg-gray-900 py-3">
       <NavbarBrand as={Link} to="https://github.com/sitrismart/DeepBlue-Ex-TKPM" target="_blank">
       <div class="bg-white rounded mr-3">
@@ -25,7 +23,6 @@ export function MyNavbar() {
         <NavbarLink as={Link} to="/courses" className="font-bold text-white">{t('navbar.courses')}</NavbarLink>
         <NavbarLink as={Link} to="/classes" className="font-bold text-white"> {t('navbar.classes')}</NavbarLink>
         <div className="flex items-center space-x-4 font-bold text-white">
-          {/* <span>{t('navbar.language')}</span> */}
           <button onClick={() => changeLanguage('en')}>ENG</button>
           <button onClick={() => changeLanguage('vi')}>VIE</button>
         </div>
