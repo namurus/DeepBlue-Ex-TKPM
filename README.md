@@ -97,11 +97,3 @@ npx vitest run
 ### Chạy chương trình
 - Chạy chương trình bằng các lệnh trong hướng dẫn sử dụng trong terminal.
 - Truy cập trang web tại: http://localhost:5173
-
-### Các tính năng đã làm được
-- Tích hợp thư viện i18next cho tính năng đa ngôn ngữ (Tiếng Anh và Tiếng Việt).
-- Xuất bảng điểm cho sinh viên (Gặp phải lỗi font Tiếng Việt).
-- Thêm danh sách sinh viên bằng file CSV.
-- Viết thêm unit test cho frontend và backend.
-- Loại bỏ các code ejs cũ trong phần views của mô hình MVC vì đã không còn sử dụng.
-- Tái cấu trúc dự án nhằm tách biệt rõ ràng giữa UI, Business Logic Data Access. Frontend sử dụng React, Backend sử dụng Express và Nodejs, Database sử dụng MongoDB.
