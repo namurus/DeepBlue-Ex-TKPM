@@ -14,7 +14,7 @@ async function addGrade(gradeData) {
         return newGrade;
     } catch (error) {
         console.error('Error adding grade:', error);
-        throw ApiError(StatusCodes.INTERNAL_SERVER_ERROR, 'Error adding grade');
+        throw new ApiError(StatusCodes.INTERNAL_SERVER_ERROR, 'Error adding grade');
     }
 }
 
@@ -25,7 +25,7 @@ async function getGradesByStudentId(studentId) {
 
     } catch (error) {
         console.error('Error fetching grades:', error);
-        throw ApiError(StatusCodes.INTERNAL_SERVER_ERROR, 'Error fetching grades');
+        throw new ApiError(StatusCodes.INTERNAL_SERVER_ERROR, 'Error fetching grades');
     }
 }
 

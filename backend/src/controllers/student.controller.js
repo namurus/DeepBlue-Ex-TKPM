@@ -49,7 +49,7 @@ let createStudent = async (req, res, next) => {
 
 let deleteStudent = async (req, res, next) => {
     try {
-        let data = await studentService.deleteStudent(req.query.id);
+        let data = await studentService.deleteStudent(req.params.studentId);
         return res.status(StatusCodes.OK).json({
             message: 'Delete student successfully',
         });
