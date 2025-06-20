@@ -21,7 +21,7 @@ const upload = multer({ storage:storage });
 
 router.get("/", studentController.getAllStudents);
 router.post("/", validateRegistration, studentController.createStudent);
-router.post("/delete-student", studentController.deleteStudent);
+router.post("/delete-student/:studentId", studentController.deleteStudent);
 router.post("/update-student", studentController.updateStudent);
 router.post("/upload",upload.single('file'), uploadFileMiddleware);
 module.exports = router;

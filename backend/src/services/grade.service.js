@@ -1,31 +1,22 @@
-const Grade = require('../models/grade.model');
+const GradeRepository = require('../repositories/grade.repository');
 const ApiError = require('../utils/ApiError');
 const { StatusCodes } = require('http-status-codes');
 
 async function addGrade(gradeData) {
     try {
-        const newGrade = await Grade.create({
-            studentId: gradeData.studentId,
-            courseCode: gradeData.courseCode,
-            courseName: gradeData.courseName,
-            grade: gradeData.grade,
-            status: gradeData.status
-        });
-        return newGrade;
+        return await GradeRepository.create(gradeData);
     } catch (error) {
         console.error('Error adding grade:', error);
-        throw ApiError(StatusCodes.INTERNAL_SERVER_ERROR, 'Error adding grade');
+        throw new ApiError(StatusCodes.INTERNAL_SERVER_ERROR, 'Error adding grade', error);
     }
 }
 
 async function getGradesByStudentId(studentId) {
     try {
-        const grades = await Grade.find({ studentId: studentId });
-        return grades;
-
+        return await GradeRepository.findByStudentId(studentId);
     } catch (error) {
         console.error('Error fetching grades:', error);
-        throw ApiError(StatusCodes.INTERNAL_SERVER_ERROR, 'Error fetching grades');
+        throw new ApiError(StatusCodes.INTERNAL_SERVER_ERROR, 'Error fetching grades', error);
     }
 }
 
@@ -33,4 +24,3 @@ module.exports = {
     addGrade,
     getGradesByStudentId,
 };
-
