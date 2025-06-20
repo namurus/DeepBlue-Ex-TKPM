@@ -15,7 +15,7 @@ export const errorHandlingMiddleware = (err, req, res, next) => {
     }
     // console.error(responseError)
 
-    // Only in DEV environment, return Stack Trace for easier debugging, otherwise remove it. (To understand more, please watch video 55 in the MERN Stack series on my YouTube channel: https://www.youtube.com/@trungquandev)
+    // Only in DEV environment, return Stack Trace for easier debugging, otherwise remove it.
     // if (env.BUILD_MODE !== 'dev') delete responseError.stack
 
     // This section can be expanded in the future, such as writing Error Log to a file, sending error notifications to Slack, Telegram, Email... etc. Or it can be written separately in a different Middleware file depending on the project.
