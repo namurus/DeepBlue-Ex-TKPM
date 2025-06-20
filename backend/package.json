@@ -6,7 +6,7 @@
     "lint": "eslint .",
     "test": "jest",
     "start": "nodemon --exec ./node_modules/.bin/babel-node src/server.js",
-    "dev": "nodemon --exec babel-node ./src/server.js"
+    "dev": "nodemon --exec ./node_modules/.bin/babel-node src/server.js"
   },
   "keywords": [
     "fullstack",
@@ -35,6 +35,8 @@
     "morgan": "^1.10.0",
     "multer": "^1.4.5-lts.2",
     "pdfkit": "^0.17.1",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
     "winston": "^3.17.0",
     "winston-mongodb": "^6.0.0"
   },

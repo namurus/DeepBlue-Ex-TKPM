@@ -1,0 +1,130 @@
+components:
+  schemas:
+
+    Student:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: "60d21b4667d0d8992e610c85"
+        name:
+          type: string
+          example: "Nguyen Van A"
+        email:
+          type: string
+          example: "a.nguyen@example.com"
+        studentId:
+          type: string
+          example: "SV001"
+        classId:
+          type: string
+          example: "10A1"
+        facultyId:
+          type: string
+          example: "CNTT"
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    Class:
+      type: object
+      properties:
+        _id:
+          type: string
+        name:
+          type: string
+        facultyId:
+          type: string
+        students:
+          type: array
+          items:
+            type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    Course:
+      type: object
+      properties:
+        _id:
+          type: string
+        name:
+          type: string
+        courseId:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    Faculty:
+      type: object
+      properties:
+        _id:
+          type: string
+        name:
+          type: string
+        facultyId:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    Grade:
+      type: object
+      properties:
+        _id:
+          type: string
+        studentId:
+          type: string
+        courseId:
+          type: string
+        grade:
+          type: number
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    Enrollment:
+      type: object
+      properties:
+        _id:
+          type: string
+        studentId:
+          type: string
+        classId:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    Configuration:
+      type: object
+      properties:
+        _id:
+          type: string
+        currentSchoolYear:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time

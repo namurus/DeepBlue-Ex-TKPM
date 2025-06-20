@@ -9,7 +9,7 @@ import path from "path";
 import morgan from "morgan";
 import cors from "cors";
 import { errorHandlingMiddleware } from "./middlewares/errorHandlingMiddleware";
-
+import { setupSwagger } from "./docs/swagger";
 dotenv.config();
 
 let app = express();
@@ -22,7 +22,10 @@ if (!fs.existsSync("logs")) {
 const accessLogStream = fs.createWriteStream(path.join("logs", "access.log"), { flags: "a" });
 app.use(morgan("combined", { stream: accessLogStream }));
 
+setupSwagger(app);
+
 app.use(bodyParser.json());
+
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
