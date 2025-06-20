@@ -1,5 +1,5 @@
 # DeepBlue-Ex-TKPM
-## Hướng dẫn sử dụng **Version 6.0**
+## Hướng dẫn sử dụng **Version 7.0**
 ### Cấu trúc source code
 ```
 Mô hình sử dụng: Mô hình MVC
@@ -38,6 +38,8 @@ DeepBlue-Ex-TKPM/
 ├── .gitignore           - Các tệp và thư mục cần loại bỏ khỏi Git
 └── README.md            - Tài liệu hướng dẫn chung cho toàn bộ dự án
 ```
+
+Developer Guide của ứng dụng: https://github.com/sitrismart/DeepBlue-Ex-TKPM/blob/main/Developer-Guide.pdf
 
 ### Hướng dẫn cài đặt & chạy chương trình
 #### 1. Cài đặt và chạy Backend (BE)
