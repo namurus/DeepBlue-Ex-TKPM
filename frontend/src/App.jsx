@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import { MyNavbar } from "./components/Navbar";
-import { MySidebar } from "./components/SideBar";
+import { MySidebar } from "./components/Sidebar";
 
 import { ThemeConfig } from "flowbite-react";
 
