@@ -36,7 +36,7 @@ let port = process.env.PORT || 6969;
 
 app.use(errorHandlingMiddleware);
 
-app.listen(port, () => {
+app.listen(port,'0.0.0.0' ,() => {
     logger.info(`Backend Node.js is running on port ${port}`);
 });
 
