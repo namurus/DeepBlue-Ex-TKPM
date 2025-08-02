@@ -1,5 +1,5 @@
 # DeepBlue-Ex-TKPM
-## Hướng dẫn sử dụng **Version 6.0**
+## Hướng dẫn sử dụng **Version 7.0**
 ### Cấu trúc source code
 ```
 Mô hình sử dụng: Mô hình MVC
@@ -38,6 +38,8 @@ DeepBlue-Ex-TKPM/
 ├── .gitignore           - Các tệp và thư mục cần loại bỏ khỏi Git
 └── README.md            - Tài liệu hướng dẫn chung cho toàn bộ dự án
 ```
+
+Developer Guide của ứng dụng: https://github.com/sitrismart/DeepBlue-Ex-TKPM/blob/main/Developer-Guide.pdf
 
 ### Hướng dẫn cài đặt & chạy chương trình
 #### 1. Cài đặt và chạy Backend (BE)
@@ -95,11 +97,3 @@ npx vitest run
 ### Chạy chương trình
 - Chạy chương trình bằng các lệnh trong hướng dẫn sử dụng trong terminal.
 - Truy cập trang web tại: http://localhost:5173
-
-### Các tính năng đã làm được
-- Tích hợp thư viện i18next cho tính năng đa ngôn ngữ (Tiếng Anh và Tiếng Việt).
-- Xuất bảng điểm cho sinh viên (Gặp phải lỗi font Tiếng Việt).
-- Thêm danh sách sinh viên bằng file CSV.
-- Viết thêm unit test cho frontend và backend.
-- Loại bỏ các code ejs cũ trong phần views của mô hình MVC vì đã không còn sử dụng.
-- Tái cấu trúc dự án nhằm tách biệt rõ ràng giữa UI, Business Logic Data Access. Frontend sử dụng React, Backend sử dụng Express và Nodejs, Database sử dụng MongoDB.
